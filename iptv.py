@@ -28,7 +28,7 @@ def static(file, start_response):
 
 
 def main(env, start_response):
-    start_response('200 OK', [('Content-Type','text/plain')])
+    start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
     playlist = urllib2.urlopen(PLAYLIST_URL).read()
     lines = playlist.decode("utf-8").splitlines()
     response = []
