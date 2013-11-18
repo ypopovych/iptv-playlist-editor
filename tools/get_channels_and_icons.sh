@@ -1,7 +1,7 @@
 #!/bin/sh
 BASEDIR=$( cd $(dirname $0) ; pwd -P )
 
-ICONS_DIR="
+ICONS_DIR=""
 XML="$BASEDIR/static/tv.xml"
 OUT="$BASEDIR/xmltv_channels.py"
 
