@@ -62,7 +62,7 @@ def main(env, start_response):
     return response
 
 
-def app(env, start_response):
+def application(env, start_response):
     if env['PATH_INFO'].startswith('/static'):
         return static(env['PATH_INFO'].replace('/static', ''), start_response)
     else:
