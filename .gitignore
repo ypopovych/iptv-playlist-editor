@@ -1,0 +1,8 @@
+*.pyc
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/vagrant.xml
+.DS_Store
+settings.py
+xmltv_channels.py
+xmltv_patch_channels.py
