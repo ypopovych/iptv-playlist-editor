@@ -5,7 +5,7 @@ import os
 import urllib2
 import difflib
 from urlparse import urlparse
-from settings import MULTICAST_TO_HTTP_URL, PLAYLIST_URL
+from settings import MULTICAST_TO_HTTP_URL, PLAYLIST_URL, DEBUG
 
 try:
     from xmltv_channels import XMLTV_CHANNELS
@@ -42,8 +42,9 @@ def main(env, start_response):
                 names = difflib.get_close_matches(name, XMLTV_CHANNELS)
                 if len(names) > 0:
                     tvg_name = names[0]
-                else:
+                elif DEBUG:
                     print tvg_name
+
             icon = tvg_name.strip().replace(' ', '').replace('/','_').encode('utf-8')
             tvg_name = tvg_name.strip().replace(' ', '_').encode('utf-8')
             response.append('#EXTINF:-1 tvg-name="'+tvg_name+'" tvg-logo="'+icon+'",'+name.encode('utf-8')+"\n")
