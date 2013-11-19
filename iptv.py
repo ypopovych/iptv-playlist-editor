@@ -3,6 +3,7 @@ __author__ = 'george'
 import mimetypes
 import os
 import urllib2
+from urlparse import parse_qsl
 import difflib
 from urlparse import urlparse
 from settings import MULTICAST_TO_HTTP_URL, PLAYLIST_URL, DEBUG
@@ -27,9 +28,20 @@ def static(file, start_response):
     return [open(STATIC_DIR+file).read()]
 
 
-def main(env, start_response):
+def main(query, start_response):
     start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
-    playlist = urllib2.urlopen(PLAYLIST_URL).read()
+    data = dict(parse_qsl(query))
+    try:
+        playlist = data["pl"]
+    except KeyError:
+        playlist = PLAYLIST_URL
+
+    try:
+        m_to_http = data["srv"]
+    except KeyError:
+        m_to_http = MULTICAST_TO_HTTP_URL
+
+    playlist = urllib2.urlopen(playlist).read()
     lines = playlist.decode("utf-8").splitlines()
     response = []
     for line in lines:
@@ -51,10 +63,10 @@ def main(env, start_response):
         elif line.startswith("#"):
             response.append(line.encode("utf-8"))
         else:
-            if MULTICAST_TO_HTTP_URL is not None:
+            if m_to_http is not None:
                 parts = urlparse(line.strip())
                 if parts.scheme in ('udp', 'rtp'):
-                    response.append(MULTICAST_TO_HTTP_URL+"/"+parts.scheme+"/"+parts.netloc.encode("utf-8")+"\n")
+                    response.append(m_to_http+"/"+parts.scheme+"/"+parts.netloc.encode("utf-8")+"\n")
                 else:
                     response.append(line.encode("utf-8")+"\n")
             else:
@@ -67,5 +79,5 @@ def application(env, start_response):
     if env['PATH_INFO'].startswith('/static'):
         return static(env['PATH_INFO'].replace('/static', ''), start_response)
     else:
-        return main(env, start_response)
+        return main(env.get("QUERY_STRING", ""), start_response)
 

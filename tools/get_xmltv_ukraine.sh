@@ -14,7 +14,7 @@ cd $TEMP/xmltv
 curl -o xml.zip $URL1
 unzip -o xml.zip
 curl -o second.xml $URL2
-tv_cat tvguide.xml second.xml > tv.xml
+tv_cat tvguide.xml second.xml | tv_sort | tv_grep --on-after now > tv.xml
 mv tv.xml $BASEDIR/../static/
 cd /
 rm -rf $TEMP/xmltv
