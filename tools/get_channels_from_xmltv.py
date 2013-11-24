@@ -9,6 +9,8 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 
+from PIL import Image
+
 
 def parse(input_xml, output_py, icon_dir):
     root = None
@@ -27,13 +29,21 @@ def parse(input_xml, output_py, icon_dir):
         if event == "end":
             if elem.tag == "channel":
                 if icon_dir is not  None and icon is not None:
-                    ext = icon[icon.rfind('.'):]
-                    icn = open(os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+ext, "wb")
-                    try:
-                        icn.write(urllib2.urlopen(icon).read())
-                        icn.close()
-                    except:
-                        pass
+                    ext = icon[icon.rfind('.'):].lower()
+                    icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
+                    if ext != ".png":
+                        try:
+                            img = Image.open(urllib2.urlopen(icon))
+                            img.save(icn_path)
+                        except:
+                            print "Load failed:", icon
+                    else:
+                        try:
+                            icn = open(icn_path, "wb")
+                            icn.write(urllib2.urlopen(icon).read())
+                            icn.close()
+                        except:
+                            pass
                 if name is not None:
                     output_py.write("    u'"+name.encode('utf-8')+"',\n")
             elif elem.tag == "display-name":
