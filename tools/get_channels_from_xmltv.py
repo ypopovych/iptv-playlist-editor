@@ -3,6 +3,7 @@ import sys
 import getopt
 import urllib2
 import os
+from cStringIO import StringIO
 
 try:
     import xml.etree.cElementTree as ET
@@ -33,10 +34,11 @@ def parse(input_xml, output_py, icon_dir):
                     icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
                     if ext != ".png":
                         try:
-                            img = Image.open(urllib2.urlopen(icon))
+                            buff = StringIO(urllib2.urlopen(icon).read())
+                            img = Image.open(buff)
                             img.save(icn_path)
-                        except:
-                            print "Load failed:", icon
+                        except Exception, e:
+                            print "Load failed:", icon, "error: ", e
                     else:
                         try:
                             icn = open(icn_path, "wb")
