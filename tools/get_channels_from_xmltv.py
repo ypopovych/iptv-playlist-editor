@@ -29,7 +29,7 @@ def parse(input_xml, output_py, icon_dir):
                 icon = None
         if event == "end":
             if elem.tag == "channel":
-                if icon_dir is not  None and icon is not None:
+                if icon_dir is not None and icon is not None:
                     ext = icon[icon.rfind('.'):].lower()
                     icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
                     if ext != ".png":
@@ -54,7 +54,7 @@ def parse(input_xml, output_py, icon_dir):
                 icon = elem.get('src')
             root.clear()
             elem.clear()
-    output_py.write("]")
+    output_py.write("]\n")
     output_py.close()
     input_xml.close()
 
