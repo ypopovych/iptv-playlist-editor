@@ -6,7 +6,9 @@ import urllib2
 from urlparse import parse_qsl
 import difflib
 from urlparse import urlparse
-from settings import MULTICAST_TO_HTTP_URL, PLAYLIST_URL, DEBUG
+from settings import (MULTICAST_TO_HTTP_URL, PLAYLISTS_URLS, DEBUG, RADIO_PLAYLISTS_URLS, TV_GUIDE_DATA_URL,
+                      TV_TIMESHIFT, TV_TIMESHIFT_MAX_PRIORITY)
+import re
 
 try:
     from xmltv_channels import XMLTV_CHANNELS
@@ -21,63 +23,204 @@ except ImportError:
 
 mimetypes.init()
 STATIC_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
+M3U_RE = re.compile('\s*([\w\-]+?)="(.*?)"', re.I | re.U)
+
+def update_url(url, m_to_http):
+    parts = urlparse(url.strip())
+    if parts.scheme in ('udp', 'rtp'):
+        return m_to_http+"/"+parts.scheme+"/"+parts.netloc.encode("utf-8")+"\n"
+    return url.encode("utf-8")+"\n"
 
 
-def static(file, start_response):
-    start_response('200 OK', [('Content-Type', mimetypes.guess_type(file)[0])])
-    return [open(STATIC_DIR+file).read()]
+def parse_m3u_parameters(line):
+    params = {}
+    pos = line.rfind(',')
+    name = line[pos+1:].strip()
+    p = line[8:pos]
+    pos = 0
+    for c in p:
+        try:
+            int(c)
+        except:
+            break
+        pos += 1
+    for match in M3U_RE.finditer(p[pos:]):
+        params[match.group(1)] = match.group(2)
+    return params, name, int(p[:pos])
 
 
-def main(query, start_response):
-    start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
+def create_m3u_info_line(name, params):
+    line = "#EXTINF:-1"
+    for key,param in params.iteritems():
+        line += " "+key.encode('utf-8')+'="'+param.encode("utf-8")+'"'
+    return line+","+name.encode('utf-8')+"\n"
+
+
+def radio_playlist(playlist_url, m_to_http=None):
+    playlist = urllib2.urlopen(playlist_url).read()
+    lines = playlist.decode("utf-8").splitlines()
+    response = []
+    for line in lines:
+        if line.startswith("#EXTINF:"):
+            params, name, ident = parse_m3u_parameters(line)
+            params['radio'] = "true"
+            response.append(create_m3u_info_line(name, params))
+        elif not line.startswith('#'):
+            if m_to_http is not None:
+                response.append(update_url(line, m_to_http))
+            else:
+                response.append(line.encode("utf-8")+"\n")
+    return response
+
+
+def video_playlist(playlist_url, timeshift, timeshift_max, debug, m_to_http=None):
+    playlist = urllib2.urlopen(playlist_url).read()
+    lines = playlist.decode("utf-8").splitlines()
+    response = []
+    for line in lines:
+        if line.startswith("#EXTINF:"):
+            params, name, ident = parse_m3u_parameters(line)
+
+            if timeshift_max:
+                if timeshift != 0:
+                    params['tvg-shift'] = str(timeshift)
+                else:
+                    try:
+                        del params['tvg-shift']
+                    except:
+                        pass
+            elif timeshift != 0 and not params.has_key("tvg-shift"):
+                params['tvg-shift'] = timeshift
+
+            name_patched = False
+            try:
+                patch = XMLTV_CHANNELS_PATCH[params['tvg-name'].replace('_', ' ')]
+                if isinstance(patch, dict):
+                    params.update(patch)
+                else:
+                    params['tvg-name'] = patch
+                name_patched = True
+            except KeyError:
+                try:
+                    patch = XMLTV_CHANNELS_PATCH[name]
+                    if isinstance(patch, dict):
+                        params.update(patch)
+                    else:
+                        params['tvg-name'] = patch
+                    name_patched = True
+                except KeyError:
+                    tvg_name = params.get('tvg-name')
+                    if tvg_name is not None:
+                        names = difflib.get_close_matches(tvg_name.replace('_', ' '), XMLTV_CHANNELS)
+                        if len(names) > 0:
+                            name_patched = True
+                            tvg_name = names[0]
+                        else:
+                            name_patched = False
+                            tvg_name = None
+                    if tvg_name is None:
+                        names = difflib.get_close_matches(name, XMLTV_CHANNELS)
+                        if len(names) > 0:
+                            name_patched = True
+                            tvg_name = names[0]
+                        else:
+                            tvg_name = params.get('tvg-name', name)
+                            name_patched = False
+                            if debug:
+                                print 'Not found: ', tvg_name
+                    params['tvg-name'] = tvg_name.strip().replace(' ', '_')
+            if name_patched or not params.has_key('tvg-logo'):
+                params['tvg-logo'] = params['tvg-name'].strip().replace('_', '').replace('/','_')
+
+            response.append(create_m3u_info_line(name, params))
+        elif not line.startswith("#"):
+            if m_to_http is not None:
+                response.append(update_url(line, m_to_http))
+            else:
+                response.append(line.encode("utf-8")+"\n")
+    return response
+
+
+def static(fl, start_response):
+    old_fl = fl
+    fl = os.path.join(STATIC_DIR, fl.replace("../", ''))
+    if os.path.isfile(fl):
+        start_response('200 OK', [('Content-Type', mimetypes.guess_type(fl)[0])])
+        return [open(fl).read()]
+    elif os.path.isdir(fl):
+        start_response('403 Forbidden', [('Content-Type', 'text/plain')])
+        return ["You can't list files in this directory"]
+
+    start_response('404 Not Found', [('Content-Type', 'text/plain')])
+    return ['File: '+old_fl+" not found on the server"]
+
+
+def main(query, start_response, static_url):
     data = dict(parse_qsl(query))
+
     try:
-        playlist = data["pl"]
+        debug = data['d']
     except KeyError:
-        playlist = PLAYLIST_URL
+        debug = DEBUG
+
+    if debug:
+        start_response('200 OK', [('Content-Type','text/plain')])
+    else:
+        start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
+
+    try:
+        playlists = data["pl"]
+        if isinstance(playlists, basestring):
+            playlists = [playlists]
+    except KeyError:
+        playlists = PLAYLISTS_URLS
 
     try:
         m_to_http = data["srv"]
     except KeyError:
         m_to_http = MULTICAST_TO_HTTP_URL
 
-    playlist = urllib2.urlopen(playlist).read()
-    lines = playlist.decode("utf-8").splitlines()
-    response = []
-    for line in lines:
-        if line.startswith("#EXTINF:"):
-            name = line[line.rfind(',')+1:].strip()
-            tvg_name = name
-            try:
-                tvg_name = XMLTV_CHANNELS_PATCH[name]
-            except KeyError:
-                names = difflib.get_close_matches(name, XMLTV_CHANNELS)
-                if len(names) > 0:
-                    tvg_name = names[0]
-                elif DEBUG:
-                    print tvg_name
+    try:
+        r_playlists = data["rpl"]
+        if isinstance(r_playlists, basestring):
+            playlists = [r_playlists]
+    except KeyError:
+        r_playlists = RADIO_PLAYLISTS_URLS
 
-            icon = tvg_name.strip().replace(' ', '').replace('/','_').encode('utf-8')
-            tvg_name = tvg_name.strip().replace(' ', '_').encode('utf-8')
-            response.append('#EXTINF:-1 tvg-name="'+tvg_name+'" tvg-logo="'+icon+'",'+name.encode('utf-8')+"\n")
-        elif line.startswith("#"):
-            response.append(line.encode("utf-8"))
-        else:
-            if m_to_http is not None:
-                parts = urlparse(line.strip())
-                if parts.scheme in ('udp', 'rtp'):
-                    response.append(m_to_http+"/"+parts.scheme+"/"+parts.netloc.encode("utf-8")+"\n")
-                else:
-                    response.append(line.encode("utf-8")+"\n")
-            else:
-                response.append(line.encode("utf-8")+"\n")
+    try:
+        tv_guide_url = data['tvg']
+    except KeyError:
+        tv_guide_url = TV_GUIDE_DATA_URL
+
+    try:
+        timeshift = int(data['ts'])
+    except KeyError:
+        timeshift = TV_TIMESHIFT
+
+    try:
+        timeshift_max = (data['tsm'] == '1')
+    except KeyError:
+        timeshift_max = TV_TIMESHIFT_MAX_PRIORITY
+
+    if tv_guide_url is not None:
+        tv_guide_url = tv_guide_url.replace("{{STATIC}}", static_url)
+        response = ['#EXTM3U tvg-url="'+tv_guide_url+'"\n']
+    else:
+        response = ['#EXTM3U\n']
+
+    for playlist in playlists:
+        response.extend(video_playlist(playlist, timeshift, timeshift_max, debug, m_to_http))
+
+    for playlist in r_playlists:
+        response.extend(radio_playlist(playlist, m_to_http))
 
     return response
 
 
 def application(env, start_response):
+    print env
     if env['PATH_INFO'].startswith('/static'):
-        return static(env['PATH_INFO'].replace('/static', ''), start_response)
+        return static(env['PATH_INFO'][8:], start_response)
     else:
-        return main(env.get("QUERY_STRING", ""), start_response)
+        return main(env.get("QUERY_STRING", ""), start_response, "http://"+env.get("HTTP_HOST", "")+"/static")
 
