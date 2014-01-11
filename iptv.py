@@ -132,6 +132,9 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, m_to_http=None
             if name_patched or not params.has_key('tvg-logo'):
                 params['tvg-logo'] = params['tvg-name'].strip().replace('_', '').replace('/','_')
 
+            if debug:
+                print "Name: ", name, " TVG: ", params.get('tvg-name')
+
             response.append(create_m3u_info_line(name, params))
         elif not line.startswith("#"):
             if m_to_http is not None:
