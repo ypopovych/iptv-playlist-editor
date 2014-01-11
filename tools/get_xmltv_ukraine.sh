@@ -11,8 +11,8 @@ fi
 
 mkdir $TEMP/xmltv
 cd $TEMP/xmltv
-curl -o xml.gz $URL1
-gunzip xml.gz
+curl -o xmltv.xml.gz $URL1
+gunzip xmltv.xml.gz
 curl -o second.xml $URL2
 tv_cat xmltv.xml second.xml | tv_sort | tv_grep --on-after now > tv.xml
 mv tv.xml $BASEDIR/../static/
