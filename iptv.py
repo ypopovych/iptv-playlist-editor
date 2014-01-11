@@ -221,9 +221,7 @@ def main(query, start_response, static_url):
 
 
 def application(env, start_response):
-    print env
     if env['PATH_INFO'].startswith('/static'):
         return static(env['PATH_INFO'][8:], start_response)
     else:
         return main(env.get("QUERY_STRING", ""), start_response, "http://"+env.get("HTTP_HOST", "")+"/static")
-
