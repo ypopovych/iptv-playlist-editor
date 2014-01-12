@@ -17,7 +17,7 @@ curl -L -o second.tgz $URL2
 tar zxvf second.tgz
 cat xmltv.xml | tv_sort --by-channel > tg.xml
 cat tvguide.xml | tv_sort --by-channel > vp.xml
-python $BASEDIR/xmltvmerger.py tg.xml vp.xml temp.xml
+perl $BASEDIR/tv_merge -i tg.xml -m vp.xml -o temp.xml
 cat temp.xml | tv_sort --by-channel  > tv.xml
 mv tv.xml $BASEDIR/../static/
 cd /
