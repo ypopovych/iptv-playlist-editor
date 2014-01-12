@@ -11,9 +11,9 @@ fi
 
 mkdir $TEMP/xmltv
 cd $TEMP/xmltv
-curl -o xmltv.xml.gz $URL1
+curl -L -o xmltv.xml.gz $URL1
 gunzip xmltv.xml.gz
-curl -o second.tgz $URL2
+curl -L -o second.tgz $URL2
 tar zxvf second.tgz
 cat xmltv.xml | tv_grep --on-after now | tv_sort --by-channel > tg.xml
 cat tvguide.xml | tv_grep --on-after now | tv_sort --by-channel > vp.xml
