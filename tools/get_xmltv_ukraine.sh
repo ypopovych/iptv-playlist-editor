@@ -18,7 +18,7 @@ tar zxvf second.tgz
 cat xmltv.xml | tv_sort --by-channel > tg.xml
 cat tvguide.xml | tv_sort --by-channel > vp.xml
 cd $BASEDIR
-perl tv_merge -i tg.xml -m vp.xml -o $TEMP/xmltv/temp.xml
+perl tv_merge -i $TEMP/xmltv/tg.xml -m $TEMP/xmltv/vp.xml -o $TEMP/xmltv/temp.xml
 cd $TEMP/xmltv
 cat temp.xml | tv_sort --by-channel  > tv.xml
 mv tv.xml $BASEDIR/../static/
