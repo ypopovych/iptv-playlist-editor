@@ -15,10 +15,10 @@ curl -L -o xmltv.xml.gz $URL1
 gunzip xmltv.xml.gz
 curl -L -o second.tgz $URL2
 tar zxvf second.tgz
-cat xmltv.xml | tv_grep --on-after now | tv_sort --by-channel > tg.xml
-cat tvguide.xml | tv_grep --on-after now | tv_sort --by-channel > vp.xml
+cat xmltv.xml | tv_sort --by-channel > tg.xml
+cat tvguide.xml | tv_sort --by-channel > vp.xml
 python $BASEDIR/xmltvmerger.py tg.xml vp.xml temp.xml
-cat temp.xml | tv_sort --by-channel > tv.xml
+cat temp.xml | tv_sort --by-channel  > tv.xml
 mv tv.xml $BASEDIR/../static/
 cd /
 rm -rf $TEMP/xmltv
