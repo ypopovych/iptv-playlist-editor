@@ -1,0 +1,92 @@
+var loadingtext =				'Lading';
+var errortext =					'Fout';
+var filetext =					'Dossier';
+var notfoundtext =				'gevonden niet';
+
+var preferenceslink =			'Voorkeur';
+var datepickerbutton =			'gaat!';
+var earliertext =				'vroeger';
+var latertext =					'later';
+
+var gridtab =					'Net';
+var displayhourslabel =			'Uren van de Vertoning';
+	var displayhourshint =		'Selecteert het aantal uren aan vertoning.';
+var autosizelabel =				'Automatische lijstgrootte';
+	var autosizehint =			'Controleert om een lijstbreedte automatisch te selecteren die op aantal kolommen wordt gebaseerd. Uncheck om het volgende gebied toe te laten.';
+var tablewidthlabel =			'Breedte van de Lijst (in pixel)';
+	var tablewidthhint =		'Specificeert de breedte van de lijst in pixel. Controleer de bovengenoemde doos om dit automatisch te plaatsen.';
+var offsetminuteslabel =		'Begint met volgende uur na';
+	var offsetminuteshint =		'Plaatste het notulengedeelte van de tijd waarna zal het net met het volgende uur op aanvankelijke lading beginnen.';
+var refreshonthelabel =			'Verfris elk uur bij';
+	var refreshonthehint =		'XSLTv kunnen de lijsten automatisch verfrissen elk uur om het net bijgewerkt te houden, als browser open wordt gehouden. Selecteer de tijd elk uur om uit te voeren verfrissen zich.'
+	var norefreshoption =		'Me verfris niet';
+var timebarfrequencylabel = 	'Time Bar Frequency';
+	var timebarfrequencyhint =	'How often to repeat the time header row.';
+	var toponlyoption =			'Top Line Only';
+	
+var popupstab =					'Popups';
+var channelpopupslabel =		'Kanaal Popups';
+	var channelpopupshint =		'Controleert om popups toe te laten wanneer de muis over de kanaalnamen is.';
+var descriptionpopupslabel =	'Beschrijving Popups';
+	var descriptionpopupshint =	'Controleert om popups toe te laten wanneer de muis over een programma is.';
+var popupdelaylabel =			'Popup Vertraging (in ms)';
+	var popupdelayhint =		'Plaatste de vertraging in milliseconden alvorens popups zullen verschijnen. Reeks bij 0 om vertraging onbruikbaar te maken.';
+var popuptimeslabel =			'Tijden';
+	var popuptimeshint =		'Controleert om begin en eindtijden in het programma te tonen popups.';
+var popupratinglabel =			'Classificatie';
+	var popupratinghint =		'Controleert om classificaties MPAA in het programma te tonen popups.';
+var popupsubtitlelabel =		'Ondertitel';
+	var popupsubtitlehint =		'Controleert om programmaondertitels in het programma te tonen popups.';
+var popupdescriptionlabel =		'Beschrijving';
+	var popupdescriptionhint =	'Controleert om programmabeschrijvingen in het programma te tonen popups.';
+var popupdatelabel =			'Datum';
+	var popupdatehint =			'Controle om data in het programma te tonen popups. De data zijn of vrijgeven data voor movies of de eerste-geluchte data voor toont.';
+var popupcategorieslabel =		'Categorie\u00ebn';
+	var popupcategorieshint =	'Te tonen Controle toont categorie\u00ebn of genres in het programma popups.';
+var popupstarratinglabel =		'Classificatie van de Ster';
+	var popupstarratinghint =	'Controleert om een grafische sterclassificatie in het programma te tonen popups.';
+
+var localoptionstab =			'Lokale Opties';
+var languagelabel =				'Taal';
+var fixgapslabel =				'Hiaten van de Moeilijke situatie in lijsten';
+	var fixgapshint =			'controleert om hiaat-opsporing in lijsten toe te laten die niet aangrenzend zijn. Deze optie vereist dat de lijsten worden gesorteerd met --by-channel aan het werk. Deze optie zal lijsten om veroorzaken langzamer te laden, zodat controleert niet onnodig.';
+	var fixgapsconfirm =		'Om hiaten in lijsten te vullen, gelieve te verzekeren het Xml- dossier met is gesorteerd --by-channel optie!';
+var absoluteiconslabel =		'Absolute pictogramverwijzingen';
+	var absoluteiconshint =		'XSLTv zoekt kanaalpictogrammen in een \'icons\' folder. Controleer deze doos als uw xmldossier absolute urlverwijzingen naar pictogrammen bevat.';
+var dayfirstlabel =				'Dag van de Vertoning eerst in data';
+	var dayfirsthint =			'Controleert deze doos om data in formaat te tonen dd/mm/jjjj. Uncheck voor formaat mm/dd/jjjj.';
+var grabberlabel =				'Grabber: tv_grab_';
+	var grabberhint =			'selecteert uw grabber om gelokaliseerde kanaal-naam montages toe te passen.';
+
+var otheroptionstab =			'Andere Opties';
+var loadonclicklabel =			'Op klik:';
+	var loadonclicknothing =	'Doet niets';
+	var loadonclickIMDB =		'Onderzoek IMDB';
+	var loadonclickURL =		'URL in XML';
+var categorycolorslabel =		'Hoogtepunt categorie\u00ebn';
+	var categorycolorshint=		'Om categorie het benadrukken (de kleuren moeten in CSS dossiers worden bepaald) toe te laten. Schrap voor een kleine de snelheidsverbetering. Dit is afzonderlijk van hetgebaseerde benadrukken.';
+var dailyfileslabel =			'Gebruikt dagelijks dossiers';
+	var dailyfileshint=			'Selecteert om dagelijkse dossiers in het formaat JJJJMMDD.xml in plaats van één enkel tv.xml- dossier te gebruiken.';
+var highlightclickablelabel =	'Benadrukt verbonden programma\'s';
+	var highlightclickablehint ='Benadrukt programma\'s die met een URL (plaats hierboven) verbonden zijn. Het type van het benadrukken hangt van stylesheet af. Het wordt geadviseerd om dit onbruikbaar te maken als alle programma\'s verbindingen moeten zijn, of als niets is. ';
+var highlightmovieslabel =		'Benadrukt movies geschat bij of over:';
+	var highlightmovieshint =	'Benadrukt movies geschat bij of meer dan dit aantal sterren. Het type van het benadrukken hangt van stylesheet af, maar is over het algemeen een helderdere kleur. Dit is afzonderlijk van de categorie die hieronder benadrukt.';
+var highlightnewlabel =			'Nieuw Hoogtepunt toont';
+	var highlightnewhint =		'Hoogtepunt toont welke voor het eerst luchten. Het benadrukken is over het algemeen een donkerdere of dikkere grens.';
+var printdateslabel =			'Toont movie versiedata';
+	var printdateshint =		'Toont movie versiedata in het net. Dit is afzonderlijk van de data in popup, en is slechts op movies van toepassing.';
+var twelvehourlabel =			'Use twelve-hour clock';
+	var twelvehourhint =		'Use twelve-hour (with AM and PM) instead of twenty-four-hour clock.';
+var showclocklabel =			'Show clock in upper right';
+	var showclockhint =			'Check to show current time and date in the top right of page.';
+var showbarclocklabel =			'Show clock in top bar';
+	var showbarclockhint =		'Check to show current time in the top bar.';
+
+var reloadbutton =				'Herladen';
+
+var monthnames =				new Array('Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December');
+var daynames =					new Array('zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag');
+var dayletters =				new Array('Z', 'M', 'D', 'W', 'D', 'V', 'Z');
+
+var alllabel =					'Allen';
+var nonelabel =					'Niets';

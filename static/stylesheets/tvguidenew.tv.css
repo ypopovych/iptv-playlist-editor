@@ -1,0 +1,594 @@
+body {
+background: #44443a url(../images/tvguidenewbg.jpg) repeat-x 0 0;
+}
+h1{
+display:none;
+}
+#gridtime {
+	color:#fff;
+	text-align:left;
+	background: transparent url(../images/tvguidenewheader.gif) no-repeat 0 0;
+	border:0px solid #4493d0;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:0px;
+	padding-right:0px;
+	margin-bottom:0px;
+	margin-left:auto;
+	margin-right:auto;
+	height:auto;
+}
+#listings {
+	table-layout:fixed;
+	border-collapse: collapse;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+	border:1px solid #dcddcb;
+	background-color:#fff;
+	}
+#calendarlink{
+	display:inline;
+	padding:0px;
+	margin:0px;
+	border:0px;
+	overflow:hidden;
+	height:20px;
+	width:15px;
+	white-space:normal;
+	background: transparent url(../images/calendar1.gif) no-repeat left center;
+	text-decoration:none;
+}
+#calendarlink span{
+	visibility:hidden;
+}
+table.internal{
+	table-layout:auto;
+	border-collapse: collapse;
+	width:100%;
+	margin:0px;
+	text-align:left;
+	border:0px;
+}
+#gobutton{
+	/*width: 37px;*/
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color:#FFF;
+	cursor: pointer; 
+	cursor: hand;
+
+}
+
+td.extendleft{
+	margin:0px;
+	padding:0px;
+	border:0px;
+	overflow: hidden;
+	height:35px;
+	width:10px;
+	white-space:normal;
+	font-size:small;
+}
+td.extendleft span{
+}
+
+td.extendright{
+	margin:0px;
+	padding:0px;
+	border:0px;
+	overflow: hidden;
+	height:35px;
+	width:10px;
+	white-space:normal;
+	font-size:small;
+}
+td.extendright span{
+}
+
+td.program{
+	text-align:left;
+	font-family:arial, sans-serif;
+	font-size: 8pt;
+	font-weight:normal;
+	margin:0px;
+	padding:1px;
+	border:0px;
+	overflow: hidden;
+	white-space:nowrap;
+	vertical-align:top;
+	height:30px;
+	width:100%;
+}
+td{
+	margin-left:1px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	border:1px solid #dcddcb;
+	overflow: hidden;
+	vertical-align:top;
+	height:30px;
+	white-space:nowrap;
+	}
+td:hover{
+	color:#f00;
+}
+td.extendright td.program{
+	padding:0px;
+	border:0px;
+}
+td.empty{
+	background-image:url(../images/empty.gif);
+}
+th{
+	font-family:arial, sans-serif;
+	font-stretch:narrower;
+	font-size: 10pt;
+	overflow: hidden;
+	}
+
+th.channel{
+	text-align:center;
+	padding:0px;
+	overflow: hidden;
+	border:1px solid #dcddcb;
+	background-color: #edeede;
+	color:#000;
+	font-size:8pt
+	}
+tr.timebar{
+	background-color:#878878;
+}
+th.time{
+	text-align:left;
+	height: 22px;
+	padding:0px;
+	margin:0px;
+	border-left:0px;
+	border-right:0px;
+	border-bottom:0px;
+	border-top:0px solid #fff;
+	text-decoration:none;
+	color:#fff;
+	font-size:13px;
+	font-weight:bold;
+	cursor: pointer;
+	}
+
+th.topleftcorner{
+	height: 22px;
+	padding:0px;
+	margin:0px;
+	border-left:0px;
+	border-right:0px;
+	border-bottom:0px;
+	border-top:0px solid #fff;
+	background-image:url(../images/tvguidenewearlier.gif);
+	background-repeat:no-repeat;
+	background-position:center center;
+	text-decoration:none;
+	color:#FDFAD6;
+	font-size:13px;
+	font-weight:bold;
+	text-indent:-5000px;
+	cursor: pointer;
+	width:120px;
+	}
+
+th.toprightcorner {
+	height: 22px;
+	padding:0px;
+	margin:0px;
+	border-left:0px;
+	border-right:0px;
+	border-bottom:0px;
+	border-top:0px solid #fff;
+	background-image:url(../images/tvguidenewlater.gif);
+	background-repeat:no-repeat;
+	background-position:center center;
+	text-decoration:none;
+	color:#FDFAD6;
+	font-size:13px;
+	font-weight:bold;
+	text-indent:-5000px;
+	cursor: pointer;
+	width:40px;
+	}
+
+/*SPORTS*/
+.Sports_non-event , .Sports_talk , .Sports_event , .sport , .Sport , .DEPORTES , .SP{
+	background-color:#deb;
+}
+/*MOVIES*/
+.MV , .film , .Film , .téléfilm , .CINE{
+	background-color:#ec9;
+}
+/*NEWS*/
+.News , .information , .Noticias{
+	background-color:#ccd;
+}
+/*CHILDREN*/
+.Children,.INFANTILES,.emission_jeunesse{
+	background-color:#bee;
+}
+.Goodmovie {
+	background-color:#ff9;
+}
+/*Popup*/
+.popupheader{
+padding: 2px;
+border: 2px solid black;
+background-color: lightyellow;
+color:black;
+width: 150px;
+Font-Family:'arial';
+font-size:11pt;
+font-weight:bold;
+}
+
+.popupbody{
+padding: 2px;
+border: 2px solid black;
+border-top: 0px;
+background-color: lightyellow;
+color:black;
+width: 150px;
+Font-Family:'arial';
+font-size:11pt;
+font-weight:normal;
+}
+
+hr{
+	border: 0px;
+	background-color: black;
+	height:1px;
+}
+
+.subtitle{
+	font-style:italic;
+}
+.popupcategorylist{
+	list-style:none;
+	padding: 0px;
+	margin:0px;
+}
+.starlist{
+	list-style: none;
+	padding: 0px;
+	margin:0px;
+	height: 15px;
+	position: relative;
+}
+.starlist li{
+	padding:0px;
+	margin:0px;
+	width:15px;
+	height:15px;
+	float: left;
+}
+.starlist li span{
+	display:none;
+}
+
+.starlist li.starempty{
+	background-image:url(../images/starempty.gif);
+}
+.starlist li.starhalf{
+	background-image:url(../images/starhalf.gif);
+}
+.starlist li.starfilled{
+	background-image:url(../images/starfilled.gif);
+}
+
+/*End Popup section*/
+
+/* Channel display classes (in this order):*/
+/* <-------------------------------------left/rightchanneltable---------------------------------->*/
+/* leftlogocell leftnumbercell             / middlecell \           rightnumbercell rightlogocell */
+/* <---------------------------------------              ---------------------------------------->*/
+/*       leftnumber leftchannelbr leftnbsp channelname rightchannelbr rightnbsp rightnumber       */
+.leftchanneltable{
+	table-layout:fixed;
+	border-collapse: collapse;
+	width:100%;
+	margin:0px;
+	border:0px;
+	background-color:#edeede;
+	padding:0px;
+}
+.leftchanneltable .leftlogocell{border:0px;}
+.leftchanneltable .leftlogocell img{border:0px;}
+.leftchanneltable .leftnumbercell{display:none;}
+.leftchanneltable .middlecell{
+	background-color:#edeede;
+	padding:0px;
+	overflow: visible;
+	border:0px;
+	text-align:left;
+}
+	.leftchanneltable .leftnumber{font-weight:bold;}
+	.leftchanneltable .leftchannelbr{}
+	.leftchanneltable .leftnbsp{display:none}
+	.leftchanneltable .channelname{font-weight:normal;}
+	.leftchanneltable .rightchannelbr{display:none;}
+	.leftchanneltable .rightnbsp{display:none;}
+	.leftchanneltable .rightnumber{display:none;}
+.leftchanneltable .rightlogocell{display:none;}
+.leftchanneltable .rightnumbercell{display:none;}
+
+.rightchanneltable{
+	table-layout:fixed;
+	border-collapse: collapse;
+	width:31px;
+	margin:0px;
+	border:0px;
+	background-color:transparent;
+	padding:0px;
+}
+.rightchanneltable .leftlogocell{
+	display:none;
+}
+.rightchanneltable .leftlogocell img{
+	display:none;
+}
+.rightchanneltable .leftnumbercell{
+	width:13px;
+	background-color:transparent;
+	padding:0px;
+	overflow: visible;
+	border:0px;
+	text-align:center;
+}
+.rightchanneltable .middlecell{
+display:none;}
+	.rightchanneltable .leftnumber{display:none;}
+	.rightchanneltable .leftchannelbr{display:none;}
+	.rightchanneltable .leftnbsp{display:none}
+	.rightchanneltable .channelname{display:none;}
+	.rightchanneltable .rightchannelbr{display:none;}
+	.rightchanneltable .rightnbsp{display:none;}
+	.rightchanneltable .rightnumber{display:none;}
+.rightchanneltable .rightlogocell{display:none;}
+.rightchanneltable .rightnumbercell{display:none;}
+
+
+/*End Channel display styles*/
+/*PREF WINDOW STYLES*/
+#menu{
+	position: absolute;
+	left:50px;
+	top:50px;
+	z-index:10;
+	background-color:#c79b9b;
+	border:1px solid #000;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+
+#menu div
+{
+	border:1px solid #ccc;
+	border-top:0px;
+ 	width: 400px;
+	background-color:white;
+	margin:0px 0px 20px 0px;
+	position:relative;
+	display:block;
+	padding: 10px;
+}
+
+#menu label,input,select {
+	display: block;
+	float: left;
+	margin-bottom: 2px;
+}
+
+#menu label {
+	text-align: right;
+	width: 175px;
+	padding-right: 10px;
+	font-family:arial, sans-serif;
+	font-size: 8pt;
+	font-weight:normal;
+
+}
+#menu br {
+	clear: left;
+}
+#preftabs
+{
+border-bottom: 1px solid #ccc;
+margin: 0;
+padding-bottom: 19px;
+padding-left: 10px;
+padding-top:10px;
+}
+
+#preftabs ul, #preftabs li
+{
+display: inline;
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+#preftabs a:link, #preftabs a:visited
+{
+background: #E8EBF0;
+border: 1px solid #ccc;
+color: #666;
+float: left;
+font-size: small;
+font-weight: normal;
+line-height: 14px;
+margin-right: 8px;
+padding: 2px 10px 2px 10px;
+text-decoration: none;
+}
+
+#preftabs a:hover { color: #f00; }
+
+.Submit{
+	padding:2px 5px 2px 5px;
+	margin: 1px;
+	float:left;
+	color:black;
+	text-decoration:none;
+	background-color:#d4d0c8;
+	border-top:white solid 1px;
+	border-left:white solid 1px;
+	border-bottom:#404040 solid 1px;
+	border-right:#404040 solid 1px;
+	text-align:center;
+}
+/*END PREF WINDOW STUFF*/
+
+#preflink{
+	position:absolute;
+	top:5px;
+	left:5px;
+	border:1px solid #000;
+	font-family:arial, sans-serif;
+	font-size:12pt;
+	font-weight:bold;
+	background-color:#df1718;
+	color:white;
+	text-align:center;
+}
+#preflink a:link{
+	text-decoration:none;
+	color:white;
+}
+#preflink a:visited{
+	text-decoration:none;
+	color:white;
+}
+#preflink a:hover{
+	text-decoration:none;
+	color:white;
+}
+#preflink a:active{
+	text-decoration:none;
+	color:white;
+}
+
+#clock,#loading{
+	position:absolute;
+	top:5px;
+	right:5px;
+	border:1px solid #000;
+	font-family:arial, sans-serif;
+	font-size:12pt;
+	font-weight:bold;
+	background-color:#df1718;
+	color:white;
+	text-align:center;
+}
+#loadingcontainer{
+width: 200px;
+position: absolute;
+left: 50%;
+top:30%;
+z-index:10;
+}
+#loading{
+position: absolute;
+left: -100px;
+z-index:10;
+display:none;
+}
+/*FASTDATEPICKER*/
+#fastDatePickerTable {
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border: 2px solid black;
+	width:auto;
+	text-align:left;
+	background: white;
+}
+#fastDatePickerRowYearMonth {
+	background: silver;
+}
+#fastDatePickerRowDaysOfWeek {
+	background: #d0d0d0;
+}
+#fastDatePickerTable td {
+	border: 1px solid gray;
+	padding: 3px;
+	text-align: center;
+}
+#fastDatePickerCellToday {
+	background: #d0d0d0;
+}
+.fastDatePickerEmphasizedDaysOfWeek {
+	background: silver;
+}
+.fastDatePickerNonSelectableElement {
+	color: silver;
+}
+.fastDatePickerSelectableElement:hover {
+	cursor: pointer;
+	background: #d0d0d0;
+}
+/*END FASTDATEPICKER*/
+
+#gridtime select{
+	display:inline;
+	float:none;
+	margin:1px;
+}
+#hintbox{ /*CSS for pop up hint box */
+position:absolute;
+top: 0;
+background-color: lightyellow;
+width: 150px; /*Default width of hint.*/ 
+padding: 3px;
+border:1px solid black;
+font:normal 11px Verdana;
+line-height:18px;
+z-index:100;
+border-right: 3px solid black;
+border-bottom: 3px solid black;
+visibility: hidden;
+}
+
+.hintanchor{ /*CSS for link that shows hint onmouseover*/
+display:block;
+font-weight: normal;
+font-size:8pt;
+color: navy;
+margin: 3px 8px;
+text-decoration: none;
+float:right;
+}
+
+tr.evenrow td.Goodmovie{
+	background-color:#ff9;
+}
+tr.evenrow td.Goodmovie table td{
+	background-color:#ff9;
+}
+tr.oddrow td.Goodmovie{
+	background-color:#ff9;
+}
+tr.oddrow td.Goodmovie table td{
+	background-color:#ff9;
+}
+
+tr.evenrow td.Clickable table.internal td.program{
+	color:blue;
+	cursor: pointer;
+}
+tr.oddrow td.Clickable table.internal td.program{
+	color:blue;
+	cursor: pointer;
+}
+
+.Newshow{
+	border:2px solid #666;
+}

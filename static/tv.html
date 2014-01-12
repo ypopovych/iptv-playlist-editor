@@ -1,0 +1,720 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>TV Listings</title>
+<!--XSLTv is Copyright 2008 Eric Lofgren. See http://www.ericandchar.com/xsltvgrid/ -->
+<link rel="stylesheet" type="text/css" href="stylesheets/yahooold.tv.css" title="YahooOld" />
+<link rel="stylesheet" type="text/css" href="stylesheets/yahoonew.tv.css" title="YahooNew" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/tvguideold.tv.css" title="TVGuideOld" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/tvguideprint.tv.css" title="TVGuidePrint" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/tvguidenew.tv.css" title="TVGuideNew" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/excite.tv.css" title="Excite" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/aol.tv.css" title="AOL" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/meevee.tv.css" title="MeeVee" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/newspaper.tv.css" title="Newspaper" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/msn.tv.css" title="MSN" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/titantv.tv.css" title="TitanTV" />
+<link rel="alternate stylesheet" type="text/css" href="stylesheets/eric.css" title="Eric" />
+<style id="topstyle" type="text/css"></style> <!--Empty style is added to for dynamic table sizing-->
+<!-- HINTBOX -->
+<script type="text/javascript">
+/***********************************************
+* Show Hint script- copyright Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+		
+var horizontal_offset="9px" //horizontal offset of hint box from anchor link
+
+/////No further editting needed
+
+var vertical_offset="0" //horizontal offset of hint box from anchor link. No need to change.
+var ie=document.all
+var ns6=document.getElementById&&!document.all
+
+function getposOffset(what, offsettype){
+var totaloffset=(offsettype=="left")? what.offsetLeft : what.offsetTop;
+var parentEl=what.offsetParent;
+while (parentEl!=null){
+totaloffset=(offsettype=="left")? totaloffset+parentEl.offsetLeft : totaloffset+parentEl.offsetTop;
+parentEl=parentEl.offsetParent;
+}
+return totaloffset;
+}
+
+function iecompattest(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function clearbrowseredge(obj, whichedge){
+var edgeoffset=(whichedge=="rightedge")? parseInt(horizontal_offset)*-1 : parseInt(vertical_offset)*-1
+if (whichedge=="rightedge"){
+var windowedge=ie && !window.opera? iecompattest().scrollLeft+iecompattest().clientWidth-30 : window.pageXOffset+window.innerWidth-40
+dropmenuobj.contentmeasure=dropmenuobj.offsetWidth
+if (windowedge-dropmenuobj.x < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure+obj.offsetWidth+parseInt(horizontal_offset)
+}
+else{
+var windowedge=ie && !window.opera? iecompattest().scrollTop+iecompattest().clientHeight-15 : window.pageYOffset+window.innerHeight-18
+dropmenuobj.contentmeasure=dropmenuobj.offsetHeight
+if (windowedge-dropmenuobj.y < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure-obj.offsetHeight
+}
+return edgeoffset
+}
+
+function showhint(menucontents, obj, e){
+if ((ie||ns6) && document.getElementById("hintbox")){
+dropmenuobj=document.getElementById("hintbox")
+dropmenuobj.innerHTML=menucontents
+dropmenuobj.style.left=dropmenuobj.style.top=-500
+dropmenuobj.x=getposOffset(obj, "left")
+dropmenuobj.y=getposOffset(obj, "top")
+dropmenuobj.style.left=dropmenuobj.x-clearbrowseredge(obj, "rightedge")+obj.offsetWidth+"px"
+dropmenuobj.style.top=dropmenuobj.y-clearbrowseredge(obj, "bottomedge")+"px"
+dropmenuobj.style.visibility="visible"
+obj.onmouseout=hidetip
+}
+}
+
+function hidetip(e){
+dropmenuobj.style.visibility="hidden"
+dropmenuobj.style.left="-500px"
+}
+
+function createhintbox(){
+var divblock=document.createElement("div")
+divblock.setAttribute("id", "hintbox")
+document.body.appendChild(divblock)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", createhintbox, false)
+else if (window.attachEvent)
+window.attachEvent("onload", createhintbox)
+else if (document.getElementById)
+window.onload=createhintbox
+
+</script>
+<!-- endHINTBOX -->
+<script type="text/javascript">
+/*Check if SSIs are working. If they are, use the server date and time intead of the client.*/
+/*This uses an external file titled 'ssitest' which contains the text 'ssiworking' */
+if('<!--#include virtual="ssitest" -->'=='ssiworking'){
+var currenttime = '<!--#config timefmt="%B %d, %Y %H:%M:%S" --><!--#echo var="DATE_LOCAL" -->';
+}else{
+var currenttime = new Date();
+}
+var xslrequest;
+var xmlrequest;
+var processor;
+var template;
+var sortstring;
+var xmlfileneeded='';
+var xmlfileloaded;
+</script>
+<script type='text/javascript' src='tv.js'></script>
+<script type="text/javascript">
+var cookie = readCookie("xsltvhours"); var hours = cookie ? Number(cookie) : 4;
+cookie = readCookie("xsltvtablewidth"); var tablewidth = cookie ? Number(cookie) : (200+(hours * 150));
+cookie = readCookie("xsltvautosize"); var autosize = cookie ? cookie : true;
+cookie = readCookie("xsltvfixgaps"); var fixgaps = cookie ? cookie : false;
+cookie = readCookie("xsltvchannelpopups"); var channelpopups = cookie ? cookie : true;
+cookie = readCookie("xsltvdescriptionpopups"); var descriptionpopups = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupdelay"); var popupdelay = cookie ? Number(cookie) : 0;
+cookie = readCookie("xsltvpopuptimes"); var popuptimes = cookie ? cookie : true;
+cookie = readCookie("xsltvpopuprating"); var popuprating = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupsubtitle"); var popupsubtitle = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupdescription"); var popupdescription = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupdate"); var popupdate = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupcategories"); var popupcategories = cookie ? cookie : true;
+cookie = readCookie("xsltvpopupstarrating"); var popupstarrating = cookie ? cookie : true;
+cookie = readCookie("xsltvabsoluteicons"); var absoluteicons = cookie ? cookie : false;
+cookie = readCookie("xsltvoffsetminutes"); var offsetminutes = cookie ? Number(cookie) : 60;
+cookie = readCookie("xsltvrefreshonthe"); var refreshonthe = cookie ? Number(cookie) : -1;
+cookie = readCookie("xsltvgrabber"); var grabber = cookie ? cookie : "tv_grab_na_dd";
+cookie = readCookie("xsltvdayfirst"); var dayfirst = cookie ? cookie : false;
+cookie = readCookie("xsltvcategorycolors"); var categorycolors = cookie ? cookie : true;
+cookie = readCookie("xsltvdailyfiles"); var dailyfiles = cookie ? cookie : false;
+cookie = readCookie("xsltvtwelvehour"); var twelvehour = cookie ? cookie : false;
+cookie = readCookie("xsltvloadonclick"); var loadonclick = cookie ? cookie : 'IMDB';
+cookie = readCookie("xsltvlanguage"); var language = cookie ? cookie : 'english';
+cookie = readCookie("xsltvhighlightclickable"); var highlightclickable = cookie ? cookie : false;
+cookie = readCookie("xsltvhighlightmovies"); var highlightmovies = cookie ? Number(cookie) : 10;
+cookie = readCookie("xsltvhighlightnew"); var highlightnew = cookie ? cookie : false;
+cookie = readCookie("xsltvprintdates"); var printdates = cookie ? cookie : true;
+cookie = readCookie("xsltvtimebarfrequency"); var timebarfrequency = cookie ? cookie : -1;
+cookie = readCookie("xsltvshowclock"); var showclock = cookie ? cookie : true;
+cookie = readCookie("xsltvshowbarclock"); var showbarclock = cookie ? cookie : false;
+
+var languagefile = 'lang/'+language+'.js'
+document.write('<script type="text/javascript" src="'+languagefile+'"><\/script>') 
+
+var myDate=new Date(currenttime);
+myDate.setMinutes(myDate.getMinutes() + (60 - offsetminutes));
+
+if(dailyfiles.toString()=="true"){
+	fileDate=myDate.getDate();
+	if (fileDate < 10) {fileDate = "0"+fileDate;}
+	fileMonth=myDate.getMonth() + 1;
+	if (fileMonth < 10) {fileMonth = "0"+fileMonth;}
+	xmlfileneeded=xmlfileneeded.concat(myDate.getFullYear(),fileMonth,fileDate,'.xml');
+}else{
+	xmlfileneeded='tv.xml'
+}
+
+if(grabber=="tv_grab_fr"){
+	sortstring="substring-after(substring-before(./@id,'.'),'C')";
+}else if(grabber=="tv_grab_es"){
+	sortstring="display-name[2]";
+}else if(grabber=="tv_grab_huro"){
+	sortstring="substring(./@id,1,3)";
+}else{
+	sortstring="display-name[3]";
+}
+
+
+if (document.implementation && document.implementation.createDocument) { //Netscape only
+	document.getElementById('topstyle').sheet.insertRule("#listings { width: "+ tablewidth +"px }", document.getElementById('topstyle').sheet.cssRules.length )
+	document.getElementById('topstyle').sheet.insertRule("#gridtime { width: "+ tablewidth +"px }", document.getElementById('topstyle').sheet.cssRules.length )
+}else{
+	document.styleSheets['topstyle'].addRule ("#listings", "width:"+ tablewidth +"px");
+	document.styleSheets['topstyle'].addRule ("#gridtime", "width:"+ tablewidth +"px");
+}
+
+
+
+function loadXSL(){
+		document.getElementById('loading').style.display="block";
+		document.getElementById('loading').innerHTML=loadingtext +" tv.xsl";
+if (window.XMLHttpRequest && window.XSLTProcessor){ //netscape, but not IE7
+		xslrequest = new XMLHttpRequest();
+		xslrequest.onreadystatechange = handleXslResponse;
+		xslrequest.overrideMimeType('text/xml');
+		xslrequest.open("GET", "tv.xsl", true);
+		xslrequest.send(null);
+	}
+	else if (window.ActiveXObject){ //IE
+		xslrequest = new ActiveXObject("Msxml2.FreeThreadedDOMDocument.3.0");
+		xslrequest.async = true;
+		xslrequest.onreadystatechange = handleXslResponse;
+		xslrequest.load("tv.xsl");
+	}
+	else {
+		alert('Your browser can\'t handle this script');
+	return;
+	}
+}
+
+function loadXML(){
+		document.getElementById('loading').style.display="block";
+		document.getElementById('loading').innerHTML=loadingtext+" "+xmlfileneeded;
+if (window.XMLHttpRequest && window.XSLTProcessor)
+	{
+		xmlrequest = new XMLHttpRequest();
+		xmlrequest.onreadystatechange = handleXmlResponse;
+		xmlrequest.overrideMimeType('text/xml');
+		xmlrequest.open("GET", xmlfileneeded, true);
+		xmlrequest.send(null);
+	}
+	else if (window.ActiveXObject){
+		xmlrequest = new ActiveXObject("Msxml2.DOMDocument.3.0");
+		xmlrequest.async = true;
+		xmlrequest.onreadystatechange = handleXmlResponse;
+		xmlrequest.load(xmlfileneeded);
+	}
+	else {
+	alert('Your browser can\'t handle this script');
+	return;
+	}
+}
+
+function handleXslResponse(){
+	if (xslrequest.readyState == 4) {
+			if (window.XMLHttpRequest && window.XSLTProcessor) { //Netscape only
+				xsl=xslrequest.responseXML;
+					sortTag = xsl.getElementsByTagName('xsl:sort'); //for firefox 3
+					if(!sortTag.item(0)){sortTag = xsl.getElementsByTagName('sort');} //for firefox 2
+					sortTag.item(0).setAttribute("select",sortstring);
+				processor.importStylesheet(xsl);
+			} 
+			else if (window.ActiveXObject){
+					sortTag = xslrequest.selectSingleNode('//xsl:sort[0]');
+					sortTag.setAttribute("select",sortstring);
+				template = new ActiveXObject("Msxml2.XSLTemplate.3.0");
+				template.stylesheet = xslrequest;
+			}
+			loadXML();
+	} else {
+		document.getElementById('loading').style.display="block";
+	}
+}
+
+function handleXmlResponse(){
+		if (xmlrequest.readyState == 4) {
+			if(xmlrequest.status>=300){
+				var errorstring=errortext+" "+xmlrequest.status+": "+filetext+" "+xmlfileneeded+" "+notfoundtext+".";
+				document.getElementById('loading').innerHTML=errorstring;
+			}else{
+				if (window.XMLHttpRequest && window.XSLTProcessor) { //Netscape only
+					xml = xmlrequest.responseXML;
+				}
+				xmlfileloaded=xmlfileneeded;
+					document.getElementById('loading').style.display="block";
+					document.getElementById('loading').innerHTML="Preparing grid...";
+				Init(hours,myDate.getHours(),myDate.getDate(),myDate.getMonth()+1,myDate.getFullYear());
+			}
+		} else {
+		document.getElementById('loading').style.display="block";
+		}
+}
+
+function Init(dl,ch,cd,cm,cy,offset) {
+/*This stuff needs to be done each time the time changes */
+	document.getElementById('loading').style.display="block";
+	document.getElementById("tvframe").style.display="none";
+	document.getElementById("tvframe").innerHTML = "";
+	var startDate=new Date(cy,cm-1,cd,ch,0,0);
+	myDate=new Date(cy,cm-1,cd,ch,0,0);
+	var endDate=new Date(cy,cm-1,cd,ch,0,0);
+	endDate.setHours(endDate.getHours()+dl);
+	var prevDate=new Date(cy,cm-1,cd,ch,0,0);
+	prevDate.setHours(prevDate.getHours()-dl);
+	
+	fileDate=startDate.getDate();
+	if (fileDate < 10) {
+		fileDate = "0"+fileDate;
+	}
+
+	fileMonth=startDate.getMonth() + 1;
+	if (fileMonth < 10) {
+		fileMonth = "0"+fileMonth;
+	}
+	if(dailyfiles.toString()=="true"){
+		xmlfileneeded='';
+		xmlfileneeded=xmlfileneeded.concat(startDate.getFullYear(),fileMonth,fileDate,'.xml');
+		//xmlfileneeded is YYYYMMDD.xml
+	}
+		if(xmlfileneeded != xmlfileloaded){
+		//reload everything
+		loadXML();
+		}else{//this is the entire remainder of the Init() function.
+	intHours = startDate.getHours();
+	intMinutes = startDate.getMinutes();
+	starthours= intHours+":";
+	if (intMinutes < 10) {
+		startminutes = "0"+intMinutes;
+	} else {
+		startminutes = intMinutes;
+	}
+	intHours = endDate.getHours();
+	intMinutes = endDate.getMinutes();
+	endhours= intHours+":";
+	if (intMinutes < 10) {
+		endminutes = "0"+intMinutes;
+	} else {
+		endminutes = intMinutes;
+	}
+	gridstarttimestring=starthours+startminutes+" "+startDate.toDateString();
+	gridendtimestring=endhours+endminutes+" "+endDate.toDateString();
+
+	if(offset){
+	startDate.setHours(startDate.getHours()+offset);
+	endDate.setHours(endDate.getHours()+offset);
+	prevDate.setHours(prevDate.getHours()+offset);
+	}
+	selectOption(startDate.getFullYear(),document.getElementById('year').options);
+	selectOption(startDate.getMonth(),document.getElementById('month').options);
+	selectOption(startDate.getDate(),document.getElementById('day').options);
+	selectOption(startDate.getHours(),document.getElementById('hour').options);
+
+	if (window.XMLHttpRequest && window.XSLTProcessor){
+		processor.setParameter(null, "DisplayLength", dl);
+		processor.setParameter(null, "CurrentHour", startDate.getHours());
+		processor.setParameter(null, "CurrentDay", startDate.getDate());
+		processor.setParameter(null, "CurrentMonth", startDate.getMonth()+1);
+		processor.setParameter(null, "CurrentYear", startDate.getFullYear());
+		
+		processor.setParameter(null, "StopHour", endDate.getHours());
+		processor.setParameter(null, "StopDay", endDate.getDate());
+		processor.setParameter(null, "StopMonth", endDate.getMonth()+1);
+		processor.setParameter(null, "StopYear", endDate.getFullYear());
+
+		processor.setParameter(null, "PrevHour", prevDate.getHours());
+		processor.setParameter(null, "PrevDay", prevDate.getDate());
+		processor.setParameter(null, "PrevMonth", prevDate.getMonth()+1);
+		processor.setParameter(null, "PrevYear", prevDate.getFullYear());
+
+		if(fixgaps.toString()=="true"){processor.setParameter(null, "FixGaps", 1);}else{processor.setParameter(null, "FixGaps", 0);}
+
+		processor.setParameter(null, "PopupDelay", popupdelay);
+		processor.setParameter(null, "EarlierText", earliertext);
+		processor.setParameter(null, "LaterText", latertext);
+		processor.setParameter(null, "TimeBarFrequency", timebarfrequency);
+		if(channelpopups.toString()=="true"){processor.setParameter(null, "ChannelPopups", 1);}else{processor.setParameter(null, "ChannelPopups", 0);}
+		if(descriptionpopups.toString()=="true"){processor.setParameter(null, "DescriptionPopups", 1);}else{processor.setParameter(null, "DescriptionPopups", 0);}
+		
+		if(absoluteicons.toString()=="true"){processor.setParameter(null, "AbsoluteIcons", 1);}else{processor.setParameter(null, "AbsoluteIcons", 0);}
+
+		if(popuptimes.toString()=="true"){processor.setParameter(null, "PopupTimes", 1);}else{processor.setParameter(null, "PopupTimes", 0);}
+		if(popuprating.toString()=="true"){processor.setParameter(null, "PopupRating", 1);}else{processor.setParameter(null, "PopupRating", 0);}
+		if(popupsubtitle.toString()=="true"){processor.setParameter(null, "PopupSubtitle", 1);}else{processor.setParameter(null, "PopupSubtitle", 0);}
+		if(popupdescription.toString()=="true"){processor.setParameter(null, "PopupDescription", 1);}else{processor.setParameter(null, "PopupDescription", 0);}
+		if(popupdate.toString()=="true"){processor.setParameter(null, "PopupDate", 1);}else{processor.setParameter(null, "PopupDate", 0);}
+		if(popupcategories.toString()=="true"){processor.setParameter(null, "PopupCategories", 1);}else{processor.setParameter(null, "PopupCategories", 0);}
+		if(popupstarrating.toString()=="true"){processor.setParameter(null, "PopupStarRating", 1);}else{processor.setParameter(null, "PopupStarRating", 0);}
+
+		processor.setParameter(null, "Grabber", grabber);
+
+		processor.setParameter(null, "HighlightMovies", highlightmovies);
+		if(highlightclickable.toString()=="true"){processor.setParameter(null, "HighlightClickable", 1);}else{processor.setParameter(null, "HighlightClickable", 0);}
+		if(printdates.toString()=="true"){processor.setParameter(null, "PrintDates", 1);}else{processor.setParameter(null, "PrintDates", 0);}
+		if(dayfirst.toString()=="true"){processor.setParameter(null, "DayFirst", 1);}else{processor.setParameter(null, "DayFirst", 0);}
+		if(categorycolors.toString()=="true"){processor.setParameter(null, "Categories", 1);}else{processor.setParameter(null, "Categories", 0);}
+		if(highlightnew.toString()=="true"){processor.setParameter(null, "HighlightNew", 1);}else{processor.setParameter(null, "HighlightNew", 0);}
+		processor.setParameter(null, "OnClick", loadonclick);
+		var fragment = processor.transformToFragment(xml, document);
+		document.getElementById('loading').style.display="none";
+		document.getElementById("tvframe").appendChild(fragment);
+	}
+	else if (window.ActiveXObject){
+		processor = template.createProcessor();
+		processor.input = xmlrequest;
+
+		processor.addParameter("DisplayLength", dl);
+		processor.addParameter("CurrentHour", startDate.getHours());
+		processor.addParameter("CurrentDay", startDate.getDate());
+		processor.addParameter("CurrentMonth", startDate.getMonth()+1);
+		processor.addParameter( "CurrentYear", startDate.getFullYear());
+
+		processor.addParameter("StopHour", endDate.getHours());
+		processor.addParameter("StopDay", endDate.getDate());
+		processor.addParameter("StopMonth", endDate.getMonth()+1);
+		processor.addParameter("StopYear", endDate.getFullYear());
+
+		processor.addParameter("PrevHour", prevDate.getHours());
+		processor.addParameter("PrevDay", prevDate.getDate());
+		processor.addParameter("PrevMonth", prevDate.getMonth()+1);
+		processor.addParameter("PrevYear", prevDate.getFullYear());
+
+		if(fixgaps.toString()=="true"){processor.addParameter("FixGaps", 1);}else{processor.addParameter("FixGaps", 0);}
+
+		processor.addParameter("PopupDelay", popupdelay);
+		processor.addParameter("EarlierText", earliertext);
+		processor.addParameter("LaterText", latertext);
+		processor.addParameter("TimeBarFrequency", timebarfrequency);
+		if(channelpopups.toString()=="true"){processor.addParameter("ChannelPopups", 1);}else{processor.addParameter("ChannelPopups", 0);}
+		if(descriptionpopups.toString()=="true"){processor.addParameter("DescriptionPopups", 1);}else{processor.addParameter("DescriptionPopups", 0);}
+
+		if(popuptimes.toString()=="true"){processor.addParameter("PopupTimes", 1);}else{processor.addParameter("PopupTimes", 0);}
+		if(popuprating.toString()=="true"){processor.addParameter("PopupRating", 1);}else{processor.addParameter("PopupRating", 0);}
+		if(popupsubtitle.toString()=="true"){processor.addParameter("PopupSubtitle", 1);}else{processor.addParameter("PopupSubtitle", 0);}
+		if(popupdescription.toString()=="true"){processor.addParameter("PopupDescription", 1);}else{processor.addParameter("PopupDescription", 0);}
+		if(popupdate.toString()=="true"){processor.addParameter("PopupDate", 1);}else{processor.addParameter("PopupDate", 0);}
+		if(popupcategories.toString()=="true"){processor.addParameter("PopupCategories", 1);}else{processor.addParameter("PopupCategories", 0);}
+		if(popupstarrating.toString()=="true"){processor.addParameter("PopupStarRating", 1);}else{processor.addParameter("PopupStarRating", 0);}
+		if(printdates.toString()=="true"){processor.addParameter("PrintDates", 1);}else{processor.addParameter("PrintDates", 0);}
+		processor.addParameter("Grabber", grabber);
+		processor.addParameter("HighlightMovies", highlightmovies);
+		if(dayfirst.toString()=="true"){processor.addParameter("DayFirst", 1);}else{processor.addParameter("DayFirst", 0);}
+		if(absoluteicons.toString()=="true"){processor.addParameter("AbsoluteIcons", 1);}else{processor.addParameter("AbsoluteIcons", 0);}
+		if(categorycolors.toString()=="true"){processor.addParameter("Categories", 1);}else{processor.addParameter("Categories", 0);}
+		if(highlightnew.toString()=="true"){processor.addParameter("HighlightNew", 1);}else{processor.addParameter("HighlightNew", 0);}
+		if(highlightclickable.toString()=="true"){processor.addParameter("HighlightClickable", 1);}else{processor.addParameter("HighlightClickable", 0);}
+		processor.addParameter("OnClick", loadonclick);
+		// Transform
+		processor.transform();
+		//Write
+		document.getElementById('loading').style.display="none";
+		document.getElementById("tvframe").innerHTML = processor.output;
+	}
+	if(self.scanDOM)scanDOM(document); //refresh popups?
+	document.getElementById('tvframe').style.display="block";
+	}//All of this is inside the conditinal block requiring that the loadedfile equal the neededfile.
+}
+</script>
+</head>
+
+<body>
+<h1>TV Listings</h1>
+<div id="gridtime">
+<div style="clear:both;"></div>
+<div style="float:left;">
+	<select id='year'></select>
+	<script type='text/javascript'>
+					populateYearSelectionBox()
+				</script>
+	<select id='month'></select>
+	<script type='text/javascript'>
+					populateMonthSelectionBox()
+				</script>
+	<select id='day'>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+					<option value='6'>6</option>
+
+					<option value='7'>7</option>
+					<option value='8'>8</option>
+					<option value='9'>9</option>
+					<option value='10'>10</option>
+					<option value='11'>11</option>
+					<option value='12'>12</option>
+
+					<option value='13'>13</option>
+					<option value='14'>14</option>
+					<option value='15'>15</option>
+					<option value='16'>16</option>
+					<option value='17'>17</option>
+					<option value='18'>18</option>
+
+					<option value='19'>19</option>
+					<option value='20'>20</option>
+					<option value='21'>21</option>
+					<option value='22'>22</option>
+					<option value='23'>23</option>
+					<option value='24'>24</option>
+
+					<option value='25'>25</option>
+					<option value='26'>26</option>
+					<option value='27'>27</option>
+					<option value='28'>28</option>
+					<option value='29'>29</option>
+					<option value='30'>30</option>
+
+					<option value='31'>31</option>
+	</select>
+	<a href="#" onclick="moveObject('calendarContainer', event);moveObject('califrame',event);document.getElementById('califrame').style.width=document.getElementById('calendarContainer').offsetWidth;document.getElementById('califrame').style.height=document.getElementById('calendarContainer').offsetHeight;" id="calendarlink"><span >Calendar</span></a>
+	<select id='hour'>
+					<option value='0'>00:00</option>
+					<option value='1'>01:00</option>
+					<option value='2'>02:00</option>
+					<option value='3'>03:00</option>
+					<option value='4'>04:00</option>
+					<option value='5'>05:00</option>
+					<option value='6'>06:00</option>
+					<option value='7'>07:00</option>
+					<option value='8'>08:00</option>
+					<option value='9'>09:00</option>
+					<option value='10'>10:00</option>
+					<option value='11'>11:00</option>
+
+					<option value='12'>12:00</option>
+					<option value='13'>13:00</option>
+					<option value='14'>14:00</option>
+					<option value='15'>15:00</option>
+					<option value='16'>16:00</option>
+					<option value='17'>17:00</option>
+					<option value='18'>18:00</option>
+					<option value='19'>19:00</option>
+					<option value='20'>20:00</option>
+					<option value='21'>21:00</option>
+					<option value='22'>22:00</option>
+					<option value='23'>23:00</option>
+	</select>
+	<button id="gobutton" onclick="Init(hours,
+	document.getElementById('hour').options[document.getElementById('hour').selectedIndex].value,
+	document.getElementById('day').options[document.getElementById('day').selectedIndex].value,
+	Number(document.getElementById('month').options[document.getElementById('month').selectedIndex].value)+1,
+	document.getElementById('year').options[document.getElementById('year').selectedIndex].value);"><script type="text/javascript">document.write(datepickerbutton)</script></button>
+</div>
+<div style="float:right;">
+	<span id="barclock"></span>
+			<select id="styleswitcher" name="styleswitcher" onchange="var v=this.options[this.selectedIndex].value; setActiveStyleSheet(v); setActiveStyleSheet(v); return false;">
+			<option value="AOL">
+				AOL
+			</option>
+			<option value="Excite">
+				Excite
+			</option>
+			<option value="MeeVee">
+				MeeVee
+			</option>
+			<option value="MSN">
+				MSN
+			</option>
+			<option value="Newspaper">
+				Newspaper
+			</option>
+			<option value="TitanTV">
+				TitanTV
+			</option>
+			<option value="TVGuideNew">
+				TV Guide (New)
+			</option>
+			<option value="TVGuideOld">
+				TV Guide (Old)
+			</option>
+			<option value="TVGuidePrint">
+				TV Guide (Print)
+			</option>
+			<option value="YahooOld">
+				Yahoo (Old)
+			</option>
+			<option value="YahooNew">
+				Yahoo (New)
+			</option>
+		</select>
+</div>
+<div style="clear:both;"></div>
+</div>
+<div id="tvframe"></div>
+<div id="loadingcontainer">
+	<div id="loading"><script type="text/javascript">document.write(loadingtext+"...");</script></div>
+</div>
+<div id="clock"></div>
+<div id="preflink">
+<a href="#" onclick="moveObject('menu', event);moveObject('prefiframe',event);document.getElementById('prefiframe').style.width=document.getElementById('menu').offsetWidth;document.getElementById('prefiframe').style.height=document.getElementById('menu').offsetHeight;"><script type="text/javascript">document.write(preferenceslink)</script></a>
+</div>
+<iframe src="javascript:;" scrolling="no" frameborder="0" id="prefiframe" style="display:none;position:absolute;"></iframe>
+<div id="menu">
+	<ul id="preftabs">
+		<li><a id="agridtab" href="#"         onclick="switchtab('agridtab','gridfieldset',true);switchtab('apopupstab','popupsfieldset',false);switchtab('alocaloptionstab','localoptionsfieldset',false);switchtab('aotheroptionstab','otheroptionsfieldset',false);"><script type="text/javascript">document.write(gridtab)</script></a></li>
+		<li><a id="apopupstab" href="#"       onclick="switchtab('agridtab','gridfieldset',false);switchtab('apopupstab','popupsfieldset',true);switchtab('alocaloptionstab','localoptionsfieldset',false);switchtab('aotheroptionstab','otheroptionsfieldset',false);"><script type="text/javascript">document.write(popupstab)</script></a></li>
+		<li><a id="alocaloptionstab" href="#" onclick="switchtab('agridtab','gridfieldset',false);switchtab('apopupstab','popupsfieldset',false);switchtab('alocaloptionstab','localoptionsfieldset',true);switchtab('aotheroptionstab','otheroptionsfieldset',false);"><script type="text/javascript">document.write(localoptionstab)</script></a></li>
+		<li><a id="aotheroptionstab" href="#" onclick="switchtab('agridtab','gridfieldset',false);switchtab('apopupstab','popupsfieldset',false);switchtab('alocaloptionstab','localoptionsfieldset',false);switchtab('aotheroptionstab','otheroptionsfieldset',true);"><script type="text/javascript">document.write(otheroptionstab)</script></a></li>
+	</ul>
+	<div id="gridfieldset">
+	<label for="hours"><script type="text/javascript">document.write(displayhourslabel)</script></label>
+		<select id="hours" name="hours" onchange="sizeform(); var v=this.options[this.selectedIndex].value; createCookie('xsltvhours',v,365);">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		</select><a href="#" class="hintanchor" onMouseover="showhint(displayhourshint, this, event)">[?]</a><br/>
+	<label for="autosize"><script type="text/javascript">document.write(autosizelabel)</script></label><input id="autosize" name="autosize" type="checkbox" onclick="sizeform(); var v=this.checked; createCookie('xsltvautosize',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(autosizehint, this, event)">[?]</a><br/>
+	<label for="tablewidth"><script type="text/javascript">document.write(tablewidthlabel)</script></label><input id="tablewidth" name="tablewidth" size="4" type="text" maxlength="4" onchange="if(checkNumeric(this,1,9999)){var v=Number(this.value); createCookie('xsltvtablewidth',v,365);}"/><a href="#" class="hintanchor" onMouseover="showhint(tablewidthhint, this, event)">[?]</a><br/>
+		<label for="offsetminutes"><script type="text/javascript">document.write(offsetminuteslabel)</script></label><select id="offsetminutes" name="offsetminutes" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvoffsetminutes',v,365);"><option value="60">:00</option><option value="55">:55</option><option value="50">:50</option><option value="45">:45</option><option value="40">:40</option><option value="35">:35</option><option value="30">:30</option><option value="25">:25</option><option value="20">:20</option><option value="15">:15</option><option value="10">:10</option><option value="05">:05</option></select><a href="#" class="hintanchor" onMouseover="showhint(offsetminuteshint, this, event)">[?]</a><br/>
+	<label for="refreshonthe"><script type="text/javascript">document.write(refreshonthelabel)</script></label><select id="refreshonthe" name="refreshonthe" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvrefreshonthe',v,365);"><option value="-1"><script type="text/javascript">document.write(norefreshoption)</script></option><option value="2">:02</option><option value="7">:07</option><option value="12">:12</option><option value="17">:17</option><option value="22">:22</option><option value="27">:27</option><option value="32">:32</option><option value="37">:37</option><option value="42">:42</option><option value="47">:47</option><option value="52">:52</option><option value="57">:57</option></select><a href="#" class="hintanchor" onMouseover="showhint(refreshonthehint,this,event)">[?]</a><br/>
+	<label for="timebarfrequency"><script type="text/javascript">document.write(timebarfrequencylabel)</script></label><select id="timebarfrequency" name="timebarfrequency" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvtimebarfrequency',v,365);"><option value="-1"><script type="text/javascript">document.write(toponlyoption)</script></option><option value="2">2</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option></select><a href="#" class="hintanchor" onMouseover="showhint(timebarfrequencyhint,this,event)">[?]</a><br/>
+	</div>
+	<div id="popupsfieldset">
+		<label for="channelpopups"><script type="text/javascript">document.write(channelpopupslabel)</script></label><input id="channelpopups" name="channelpopups" type="checkbox" onchange="var v=this.checked; createCookie('xsltvchannelpopups',v,365);" /><a href="#" class="hintanchor" onMouseover="showhint(channelpopupshint, this, event)">[?]</a><br/>
+		<label for="descriptionpopups"><script type="text/javascript">document.write(descriptionpopupslabel)</script></label><input id="descriptionpopups" name="descriptionpopups" type="checkbox" onchange="var v=this.checked; createCookie('xsltvdescriptionpopups',v,365);" /><a href="#" class="hintanchor" onMouseover="showhint(descriptionpopupshint, this, event)">[?]</a><br/>
+		<label for="popupdelay"><script type="text/javascript">document.write(popupdelaylabel)</script></label><input id="popupdelay" name="popupdelay" size="4" type="text" maxlength="4" onchange="if(checkNumeric(this,0,9999)){var v=Number(this.value); createCookie('xsltvpopupdelay',v,365);}"/><a href="#" class="hintanchor" onMouseover="showhint(popupdelayhint, this, event)">[?]</a><br/>
+		<label for="popuptimes"><script type="text/javascript">document.write(popuptimeslabel)</script></label><input id="popuptimes" name="popuptimes" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopuptimes',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popuptimeshint, this, event)">[?]</a><br/>
+		<label for="popuprating"><script type="text/javascript">document.write(popupratinglabel)</script></label><input id="popuprating" name="popuprating" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopuprating',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupratinghint, this, event)">[?]</a><br/>
+		<label for="popupsubtitle"><script type="text/javascript">document.write(popupsubtitlelabel)</script></label><input id="popupsubtitle" name="popupsubtitle" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopupsubtitle',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupsubtitlehint, this, event)">[?]</a><br/>
+		<label for="popupdescription"><script type="text/javascript">document.write(popupdescriptionlabel)</script></label><input id="popupdescription" name="popupdescription" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopupdescription',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupdescriptionhint, this, event)">[?]</a><br/>
+		<label for="popupdate"><script type="text/javascript">document.write(popupdatelabel)</script></label><input id="popupdate" name="popupdate" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopupdate',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupdatehint, this, event)">[?]</a><br/>
+		<label for="popupcategories"><script type="text/javascript">document.write(popupcategorieslabel)</script></label><input id="popupcategories" name="popupcategories" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopupcategories',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupcategorieshint, this, event)">[?]</a><br/>
+		<label for="popupstarrating"><script type="text/javascript">document.write(popupstarratinglabel)</script></label><input id="popupstarrating" name="popupstarrating" type="checkbox" onclick="var v=this.checked; createCookie('xsltvpopupstarrating',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(popupstarratinghint, this, event)">[?]</a><br/>
+	</div>
+	<div id="localoptionsfieldset">
+	<label for="language"><script type="text/javascript">document.write(languagelabel)</script></label><select id="language" name="language" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvlanguage',v,365);"><option value="czech">&#269;esky</option><option value="deutsch">Deutsch</option><option value="english">English</option><option value="espanol">Espa&#241;ol</option><option value="francais">Fran&#231;ais</option><option value="italiano">Italiano</option><option value="nederlands">Nederlands</option><option value="portugues">Portugu&#234;s</option><option value="svensk">Svensk</option></select><br/> 
+	<label for="fixgaps"><script type="text/javascript">document.write(fixgapslabel)</script></label><input id="fixgaps" name="fixgaps" type="checkbox" onclick="var v=this.checked;if(v){var x=confirm(fixgapsconfirm);if(x){createCookie('xsltvfixgaps',v,365);}else{this.checked=false;}}else{createCookie('xsltvfixgaps',v,365);}"/><a href="#" class="hintanchor" onMouseover="showhint(fixgapshint, this, event)">[?]</a><br />
+	<label for="absoluteicons"><script type="text/javascript">document.write(absoluteiconslabel)</script></label><input id="absoluteicons" name="absoluteicons" type="checkbox" onclick="var v=this.checked; createCookie('xsltvabsoluteicons',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(absoluteiconshint, this, event)">[?]</a><br />
+	<label for="dayfirst"><script type="text/javascript">document.write(dayfirstlabel)</script></label><input id="dayfirst" name="dayfirst" type="checkbox" onclick="var v=this.checked; createCookie('xsltvdayfirst',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(dayfirsthint, this, event)">[?]</a><br />
+	<label for="grabber"><script type="text/javascript">document.write(grabberlabel)</script></label><select id="grabber" name="grabber" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvgrabber',v,365);if(v=='tv_grab_na_dd'){document.getElementById('dayfirst').checked=false; createCookie('xsltvdayfirst',false,365);}else if(v=='tv_grab_es' || v=='tv_grab_fr' || v=='tv_grab_se' || v=='tv_grab_de'){document.getElementById('dayfirst').checked=true; createCookie('xsltvdayfirst',true,365);}"><option value="tv_grab_de">de</option><option value="tv_grab_es">es</option><option value="tv_grab_fr">fr</option><option value="tv_grab_huro">huro</option><option value="tv_grab_na_dd">na_dd</option><option value="tv_grab_se">se</option></select><a href="#" class="hintanchor" onMouseover="showhint(grabberhint, this, event)">[?]</a><br/> 
+	</div>
+	<div id="otheroptionsfieldset">
+	<label for="loadonclick"><script type="text/javascript">document.write(loadonclicklabel)</script></label><select id="loadonclick" name="loadonclick" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvloadonclick',v,365);"><option value="nothing"><script type="text/javascript">document.write(loadonclicknothing)</script></option><option value="IMDB"><script type="text/javascript">document.write(loadonclickIMDB)</script></option><option value="URL"><script type="text/javascript">document.write(loadonclickURL)</script></option></select><br/>
+	<label for="highlightclickable"><script type="text/javascript">document.write(highlightclickablelabel)</script></label><input id="highlightclickable" name="highlightclickable" type="checkbox"  onclick="var v=this.checked; createCookie('xsltvhighlightclickable',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(highlightclickablehint, this, event)">[?]</a><br/>
+	<label for="highlightmovies"><script type="text/javascript">document.write(highlightmovieslabel)</script></label>
+		<select id="highlightmovies" name="highlightmovies" onchange="var v=this.options[this.selectedIndex].value; createCookie('xsltvhighlightmovies',v,365);">
+			<option value="0"><script type="text/javascript">document.write(alllabel)</script></option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10"><script type="text/javascript">document.write(nonelabel)</script></option>
+		</select><a href="#" class="hintanchor" onMouseover="showhint(highlightmovieshint, this, event)">[?]</a><br/>
+
+	<label for="categorycolors"><script type="text/javascript">document.write(categorycolorslabel)</script></label><input id="categorycolors" name="categorycolors" type="checkbox" onclick="var v=this.checked; createCookie('xsltvcategorycolors',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(categorycolorshint, this, event)">[?]</a><br/>
+	<label for="highlightnew"><script type="text/javascript">document.write(highlightnewlabel)</script></label><input id="highlightnew" name="highlightnew" type="checkbox" onclick="var v=this.checked; createCookie('xsltvhighlightnew',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(highlightnewhint, this, event)">[?]</a><br/>
+	<label for="printdates"><script type="text/javascript">document.write(printdateslabel)</script></label><input id="printdates" name="printdates" type="checkbox" onclick="var v=this.checked; createCookie('xsltvprintdates',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(printdateshint, this, event)">[?]</a><br/>
+	<label for="dailyfiles"><script type="text/javascript">document.write(dailyfileslabel)</script></label><input id="dailyfiles" name="dailyfiles" type="checkbox" onclick="var v=this.checked; createCookie('xsltvdailyfiles',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(dailyfileshint, this, event)">[?]</a><br/>
+	<label for="twelvehour"><script type="text/javascript">document.write(twelvehourlabel)</script></label><input id="twelvehour" name="twelvehour" type="checkbox" onclick="var v=this.checked; createCookie('xsltvtwelvehour',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(twelvehourhint, this, event)">[?]</a><br/>
+	<label for="showclock"><script type="text/javascript">document.write(showclocklabel)</script></label><input id="showclock" name="showclock" type="checkbox" onclick="var v=this.checked; createCookie('xsltvshowclock',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(showclockhint, this, event)">[?]</a><br/>
+	<label for="showbarclock"><script type="text/javascript">document.write(showbarclocklabel)</script></label><input id="showbarclock" name="showbarclock" type="checkbox" onclick="var v=this.checked; createCookie('xsltvshowbarclock',v,365);"/><a href="#" class="hintanchor" onMouseover="showhint(showbarclockhint, this, event)">[?]</a><br/>
+	</div>
+	<a href="#" class="Submit" onClick="window.location.reload();"><script type="text/javascript">document.write(reloadbutton)</script></a>
+</div>
+<script type="text/javascript">
+document.getElementById('menu').style.display="none"; /*hide the preferences form*/
+document.getElementById('loading').style.display="block";
+if (window.XMLHttpRequest && window.XSLTProcessor) { //Netscape only
+	var processor = new XSLTProcessor();
+} 
+loadXSL(); /*loadXSL starts a chain reaction which does everything, mostly asynchronously */
+</script>
+<script type="text/javascript">
+/*put the correct values into the prefs window */
+document.getElementById('hours').selectedIndex=hours-1; 
+document.getElementById('tablewidth').value=tablewidth;
+document.getElementById('popupdelay').value=popupdelay;
+if(autosize.toString()=="true"){document.getElementById('autosize').checked=true;sizeform();}else{document.getElementById('autosize').checked=false;}
+if(fixgaps.toString()=="true"){document.getElementById('fixgaps').checked=true;}else{document.getElementById('fixgaps').checked=false;}
+if(absoluteicons.toString()=="true"){document.getElementById('absoluteicons').checked=true;}else{document.getElementById('absoluteicons').checked=false;}
+if(channelpopups.toString()=="true"){document.getElementById('channelpopups').checked=true;}else{document.getElementById('channelpopups').checked=false;}
+if(descriptionpopups.toString()=="true"){document.getElementById('descriptionpopups').checked=true;}else{document.getElementById('descriptionpopups').checked=false;}
+if(popuptimes.toString()=="true"){document.getElementById('popuptimes').checked=true;}else{document.getElementById('popuptimes').checked=false;}
+if(popuprating.toString()=="true"){document.getElementById('popuprating').checked=true;}else{document.getElementById('popuprating').checked=false;}
+if(popupsubtitle.toString()=="true"){document.getElementById('popupsubtitle').checked=true;}else{document.getElementById('popupsubtitle').checked=false;}
+if(popupdescription.toString()=="true"){document.getElementById('popupdescription').checked=true;}else{document.getElementById('popupdescription').checked=false;}
+if(popupdate.toString()=="true"){document.getElementById('popupdate').checked=true;}else{document.getElementById('popupdate').checked=false;}
+if(popupcategories.toString()=="true"){document.getElementById('popupcategories').checked=true;}else{document.getElementById('popupcategories').checked=false;}
+if(popupstarrating.toString()=="true"){document.getElementById('popupstarrating').checked=true;}else{document.getElementById('popupstarrating').checked=false;}
+selectOption(getActiveStyleSheet(),document.getElementById('styleswitcher').options);
+selectOption(offsetminutes,document.getElementById('offsetminutes').options);
+selectOption(refreshonthe,document.getElementById('refreshonthe').options);
+selectOption(timebarfrequency,document.getElementById('timebarfrequency').options);
+selectOption(grabber,document.getElementById('grabber').options);
+selectOption(language,document.getElementById('language').options);
+selectOption(loadonclick,document.getElementById('loadonclick').options);
+if(dayfirst.toString()=="true"){document.getElementById('dayfirst').checked=true;}else{document.getElementById('dayfirst').checked=false;}
+if(dailyfiles.toString()=="true"){document.getElementById('dailyfiles').checked=true;}else{document.getElementById('dailyfiles').checked=false;}
+if(twelvehour.toString()=="true"){document.getElementById('twelvehour').checked=true;}else{document.getElementById('twelvehour').checked=false;}
+if(showclock.toString()=="true"){document.getElementById('showclock').checked=true;}else{document.getElementById('showclock').checked=false;}
+if(showbarclock.toString()=="true"){document.getElementById('showbarclock').checked=true;}else{document.getElementById('showbarclock').checked=false;}
+if(categorycolors.toString()=="true"){document.getElementById('categorycolors').checked=true;}else{document.getElementById('categorycolors').checked=false;}
+if(highlightclickable.toString()=="true"){document.getElementById('highlightclickable').checked=true;}else{document.getElementById('highlightclickable').checked=false;}
+if(highlightnew.toString()=="true"){document.getElementById('highlightnew').checked=true;}else{document.getElementById('highlightnew').checked=false;}
+if(printdates.toString()=="true"){document.getElementById('printdates').checked=true;}else{document.getElementById('printdates').checked=false;}
+selectOption(highlightmovies,document.getElementById('highlightmovies').options);
+
+if(showclock.toString()=="false"){document.getElementById('clock').style.display="none";}
+if(showbarclock.toString()=="false"){document.getElementById('barclock').style.display="none";}
+
+switchtab('agridtab','gridfieldset',false);
+switchtab('apopupstab','popupsfieldset',false);
+switchtab('alocaloptionstab','localoptionsfieldset',true);
+switchtab('aotheroptionstab','otheroptionsfieldset',false);
+</script>
+<iframe src="javascript:;" scrolling="no" frameborder="0" id="califrame" style="display:none;position:absolute;"></iframe>
+<div id='calendarContainer' style="display:none; position:absolute;"></div>
+<script type='text/javascript'>
+			// Initializing the date picker object:
+			var fastDatePicker = new FastDatePicker();
+			// Changing some of the default settings if necessary:
+			firstdate = new Date();
+			fastDatePicker.firstSelectableDate = new Date(firstdate.getFullYear()-2,0,1,0,0,0);
+			fastDatePicker.monthNames = monthnames
+			fastDatePicker.daysOfWeek = dayletters
+			// This function will be called when the user selects a date:
+			function handleSelection() {
+				selectOption(fastDatePicker.date.getFullYear(), document.getElementById('year').options);
+				selectOption(fastDatePicker.date.getMonth(),document.getElementById('month').options);
+				selectOption(fastDatePicker.date.getDate(),document.getElementById('day').options);
+				moveObject('calendarContainer', event);moveObject('califrame',event);document.getElementById('califrame').style.width=document.getElementById('calendarContainer').offsetWidth;document.getElementById('califrame').style.height=document.getElementById('calendarContainer').offsetHeight;			}
+			document.getElementById('calendarContainer').appendChild(fastDatePicker.calendar());
+			// Showing the calendar:
+		</script>
+
+<script type='text/javascript' src='boxover.js'></script>
+</body>
+</html>

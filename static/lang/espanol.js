@@ -1,0 +1,92 @@
+var loadingtext =				'Cargando';
+var errortext =					'Error';
+var filetext =					'Archivo';
+var notfoundtext =				'no encontrado';
+
+var preferenceslink =			'Preferencias';
+var datepickerbutton =			'\u00A1Ir!';
+var earliertext =				'Antes';
+var latertext =					'Despu\u00E9s';
+
+var gridtab =					'Rejilla';
+var displayhourslabel =			'Horas a mostrar';
+	var displayhourshint =		'Seleccione el n\u00FAmero de horas a mostrar.';
+var autosizelabel =				'Tama\u00F1o de la rejilla autom\u00E1tico';
+	var autosizehint =			'Chequee para seleccionar una anchura autom\u00E1tica de la tabla basada en el n\u00FAmero de columnas. Uncheck para permitir el campo siguiente.';
+var tablewidthlabel =			'Anchura de la rejilla (en pixeles)';
+	var tablewidthhint =		'Especifique la anchura de la tabla en pixeles. Marque la opci\u00F3n anterior para fijar esto autom\u00E1ticamente.';
+var offsetminuteslabel =		'Comienzo con la hora pr\u00F3xima despu\u00E9s de';
+	var offsetminuteshint =		'Fije la porci\u00F3n de los minutos de la hora despu\u00E9s de la cual la rejilla comenzar\u00E1 con la hora pr\u00F3xima al cargar.';
+var refreshonthelabel =			'Restaure cada hora en';
+	var refreshonthehint =		'XSLTv puede refresco autom\u00e1tico los listados cada hora para mantener la rejilla actualizada, si el browser se mantiene abierto. Seleccione la \u00e9poca cada hora de realizar la restauraci\u00f3n'
+	var norefreshoption =		'No restaure';
+var timebarfrequencylabel = 	'Time Bar Frequency';
+	var timebarfrequencyhint =	'How often to repeat the time header row.';
+	var toponlyoption =			'Top Line Only';
+	
+var popupstab =					'Popups';
+var channelpopupslabel =		'Popups del canal';
+	var channelpopupshint =		'Chequee para permitir los popups cuando el rat\u00F3n est\u00E1 sobre los nombres del canal.';
+var descriptionpopupslabel =	'Popups del programa';
+	var descriptionpopupshint =	'Chequee para permitir los popups cuando el rat\u00F3n est\u00E1 sobre un programa.';
+var popupdelaylabel =			'Retardo de los Popups (en ms)';
+	var popupdelayhint =		'Fije el retardo en milisegundos antes de que aparezcan los popups. Fije en 0 para inhabilitar el retardo.';
+var popuptimeslabel =			'Horas';
+	var popuptimeshint =		'Cheque para mostrar la hora de comienzo y final en los popups del programa.';
+var popupratinglabel =			'Ratio';
+	var popupratinghint =		'Chequee para mostrar el ratio en los popups del programa.';
+var popupsubtitlelabel =		'Subt\u00EDtulo';
+	var popupsubtitlehint =		'Chequee para mostrar los subt\u00EDtulos del programa en los popups del programa.';
+var popupdescriptionlabel =		'Descripci\u00F3n';
+	var popupdescriptionhint =	'Chequee para mostrar las descripciones del programa en los popups del programa.';
+var popupdatelabel =			'Fecha';
+	var popupdatehint =			'Chequee para mostrar las fechas en los popups del programa. Las fechas son incluso fechas del lanzamiento para las pel\u00EDculas o fechas de primera emisi\u00F3n para los programas.';
+var popupcategorieslabel =		'Categor\u00EDas';
+	var popupcategorieshint =	'Chequee para mostrar categor\u00EDas o g\u00E9neros en los popups del programa.';
+var popupstarratinglabel =		'Informaci\u00F3n de actores';
+	var popupstarratinghint =	'Chequee para mostrar Informaci\u00F3n de los actores de un modo gr\u00E1fico en los popups del programa.';
+
+var localoptionstab =			'Opciones locales';
+var languagelabel =				'Lengua';
+var fixgapslabel =				'Rellenar los espacios en los listados';
+	var fixgapshint =			'Chequee para permitir la detecci\u00F3n de espacios en los listados que no est\u00E1n contiguos. Esta opci\u00F3n requiere que los listados esten ordenados con la opci\u00F3n --by-channel. Esta opci\u00F3n har\u00E1 que los listados carguen mucho m\u00E1s lentamente, as\u00ED que no se marque innecesariamente.';
+	var fixgapsconfirm =		'\u00A1Para rellenar los espacios en los listados, asegurese por favor que el archivo de XML se ha ordenado con la opci\u00F3n --by-channel!';
+var absoluteiconslabel =		'Referencia absoluta al icono';
+	var absoluteiconshint =		'XSLTv busca iconos del canal en el directorio \'icons\'. Chequee esta caja si su archivo del xml contiene URLs con referencias absolutas a los iconos.';
+var dayfirstlabel =				'Mostrar d\u00EDa al cominezo de la fecha';
+	var dayfirsthint =			'Chequee esta caja para mostrar las fechas en formato de dd/mm/aaaa. Uncheck para el formato de mm/dd/aaaa.';
+var grabberlabel =				'Grabber: tv_grab_';
+	var grabberhint =			'Seleccione su grabber para aplicar los ajustes locales de channel-name.';
+
+var otheroptionstab =			'Otras Opciones';
+var loadonclicklabel =			'En click:';
+	var loadonclicknothing =	'No haga Nada';
+	var loadonclickIMDB =		'B\u00FAsqueda IMDB';
+	var loadonclickURL =		'URL en XML';
+var categorycolorslabel =		'Categor\u00EDas coloreadas';
+	var categorycolorshint=		'Chequee para permitir destacar la categor\u00EDa (los colores se deben definir en los archivos CSS). Uncheck para una peque\u00f1a mejora de la velocidad.';
+var dailyfileslabel =			'Utilice los archivos diarios';
+	var dailyfileshint=			'Chequee para utilizar archivos diarios en el formato AAAAMMDD.xml en vez de un solo archivo de tv.xml.';
+var highlightclickablelabel =	'Resaltar programas enlazados';
+	var highlightclickablehint ='Resaltar programas que est\u00e1n enlazados a una URL (establecido arriba). El tipo de resaltado depende de la hoja de estilo. Se recomienda deshabilitar esta opci\u00f3n si todos los programas tienen enlaces o si no hay ninguno.';
+var highlightmovieslabel = 		'Resaltar pel\u00edculas catalogadas por encima o debajo de';
+	var highlightmovieshint = 	'Resaltar pel\u00edculas catalogadas por encima o debajo de este numero de estrellas. El tipo de resaltado depende de la hoja de estilo, pero es generalmente un color brillante. Esto esta separado del resaltado de categor\u00eda indicado debajo.';
+var highlightnewlabel =         'Resaltar nuevos programas';
+	var highlightnewhint =      'Resaltar programas que son emitidos por primera vez. El resaltado es generalmente un borde mas grueso o mas oscuro.';
+var printdateslabel =       	'Mostrar fechas de liberaci\u00f3n de las pel\u00edculas';
+	var printdateshint =        'Mostrar fechas de liberaci\u00f3n de las pel\u00edculas en la parrilla. Esto esta separado de las fechas en el popup, y solo aplica a las pel\u00edculas.';
+var twelvehourlabel =			'Use twelve-hour clock';
+	var twelvehourhint =		'Use twelve-hour (with AM and PM) instead of twenty-four-hour clock.';
+var showclocklabel =			'Show clock in upper right';
+	var showclockhint =			'Check to show current time and date in the top right of page.';
+var showbarclocklabel =			'Show clock in top bar';
+	var showbarclockhint =		'Check to show current time in the top bar.';
+
+var reloadbutton =				'Recarga';
+
+var monthnames =				new Array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre')
+var daynames =					new Array('domingo', 'lunes', 'martes', 'mi\u00e9rcoles', 'jueves', 'viernes', 's\u00e1bado');
+var dayletters =				new Array('D', 'L', 'M', 'M', 'T', 'V', 'S');
+
+var alllabel =					'Todos';
+var nonelabel =					'Ninguno';

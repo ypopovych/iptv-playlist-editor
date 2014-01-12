@@ -1,0 +1,92 @@
+var loadingtext =				'Carregamento';
+var errortext =					'Erro';
+var filetext =					'Lima';
+var notfoundtext =				'n\u00e3o encontrado';
+
+var preferenceslink =			'Prefer\u00eancias';
+var datepickerbutton =			'Vai!';
+var earliertext =				'Mais cedo';
+var latertext =					'Mais tarde';
+
+var gridtab =					'Grade';
+var displayhourslabel =			'Horas exposi\u00e7\u00e3o';
+	var displayhourshint =		'Seleciona o n\u00famero das horas para indicar.';
+var autosizelabel =				'Tamanho autom\u00e1tico da tabela';
+	var autosizehint =			'Verifica\u00e7\u00e3o para selecionar automaticamente uma largura da tabela baseada no n\u00famero de colunas. Uncheck para permitir o campo seguinte.';
+var tablewidthlabel =			'Largura tabela (nos pixels)';
+	var tablewidthhint =		'Especifica a largura da tabela nos pixels. Verifique a caixa acima para ajustar automaticamente isto.';
+var offsetminuteslabel =		'Come\u00e7o com hora seguinte ap\u00f3s';
+	var offsetminuteshint =		'Ajustou a parcela dos minutos da hora depois do qual a grade come\u00e7ar\u00e1 com a hora seguinte na carga inicial.';
+var refreshonthelabel =			'Refresque cada hora em';
+	var refreshonthehint =		'XSLTv pode automaticamente refrescar as listas cada hora para manter a grade moderna, se o browser for mantido aberto. Selecione o momento cada hora de executar refrescar.'
+	var norefreshoption =		'N\u00e3o refresque';
+var timebarfrequencylabel = 	'Time Bar Frequency';
+	var timebarfrequencyhint =	'How often to repeat the time header row.';
+	var toponlyoption =			'Top Line Only';
+	
+var popupstab =					'Popups';
+var channelpopupslabel =		'Canaleta Popups';
+	var channelpopupshint =		'Verifica\u00e7\u00e3o para permitir os popups quando o rato estiver sobre os nomes da canaleta.';
+var descriptionpopupslabel =	'Descri\u00e7\u00e3o Popups';
+	var descriptionpopupshint =	'Verifica\u00e7\u00e3o para permitir os popups quando o rato estiver sobre um programa.';
+var popupdelaylabel =			'Popup atrasa (no ms)';
+	var popupdelayhint =		'Ajustou-se atrasa nos milissegundos antes que os popups aparecessem. Ajuste em 0 para incapacitar atrasa.';
+var popuptimeslabel =			'Cronometra';
+	var popuptimeshint =		'Verifica\u00e7\u00e3o para mostrar tempos do come\u00e7o e do fim nos popups do programa.';
+var popupratinglabel =			'Avalia\u00e7\u00e3o';
+	var popupratinghint =		'Verifica\u00e7\u00e3o para mostrar avalia\u00e7\u00f5es de MPAA nos popups do programa.';
+var popupsubtitlelabel =		'Subt\u00edtulo';
+	var popupsubtitlehint =		'Verifica\u00e7\u00e3o para mostrar subt\u00edtulos do programa nos popups do programa.';
+var popupdescriptionlabel =		'Descri\u00e7\u00e3o';
+	var popupdescriptionhint =	'Verifica\u00e7\u00e3o para mostrar descri\u00e7\u00f5es do programa nos popups do programa.';
+var popupdatelabel =			'Data';
+	var popupdatehint =			'Verifica\u00e7\u00e3o para mostrar datas nos popups do programa. As datas s\u00e3o datas da libera\u00e7\u00e3o para filmes ou datas primeiro-arejadas para mostras.';
+var popupcategorieslabel =		'Categorias';
+	var popupcategorieshint =	'Verifica\u00e7\u00e3o para mostrar categorias ou genres da mostra nos popups do programa.';
+var popupstarratinglabel =		'Avalia\u00e7\u00e3o estrela';
+	var popupstarratinghint =	'Verifica\u00e7\u00e3o para mostrar uma avalia\u00e7\u00e3o gr\u00e1fica da estrela nos popups do programa.';
+
+var localoptionstab =			'Op\u00e7\u00f5es locais';
+var languagelabel =				'L\u00edngua';
+var fixgapslabel =				'Reparo abre nas listas';
+	var fixgapshint =			'Verifica\u00e7\u00e3o para permitir a abertura-dete\u00e7\u00e3o nas listas que n\u00e3o s\u00e3o cont\u00edguas. Esta op\u00e7\u00e3o requer listas ser classificada com --by-channel a trabalhar. Esta op\u00e7\u00e3o far\u00e1 com que as listas carreguem muito mais lentamente, assim que n\u00e3o as verifica desnecessariamente.';
+	var fixgapsconfirm =		'Para encher aberturas nas listas, assegura por favor a lima de XML foi classificado com op\u00e7\u00e3o da --by-channel!';
+var absoluteiconslabel =		'\u00cdcone absoluto references';
+	var absoluteiconshint =		'XSLTv procura \u00edcones da canaleta no \'icones\' diret\u00f3rio. Verifique esta caixa se sua lima do xml contiver refer\u00eancias do Absolute URL aos \u00edcones.';
+var dayfirstlabel =				'Dia exposi\u00e7\u00e3o primeiramente nas datas';
+	var dayfirsthint =			'Verifica\u00e7\u00e3o esta caixa para mostrar datas em dd/mm/aaaa formata. Uncheck para o formato de mm/dd/aaaa.';
+var grabberlabel =				'Grabber: tv_grab_';
+	var grabberhint =			'Seleciona seu grabber aplicar ajustes localizados do canaleta-nome.';
+
+var otheroptionstab =			'Outras op\u00e7\u00f5es';
+var loadonclicklabel =			'No clique:';
+	var loadonclicknothing =	'N\u00e3o faz nada';
+	var loadonclickIMDB =		'Busca IMDB';
+	var loadonclickURL =		'URL em XML';
+var categorycolorslabel =		'Categoria que destaca';
+	var categorycolorshint=		'Seleto para permitir o destaque da categoria (as cores devem ser definidas em limas do CSS). Deselect para uma melhoria pequena da velocidade. Isto é separado do destaque avalia\u00e7\u00e3o-baseado.';
+var dailyfileslabel =			'Uso arquiva diariamente';
+	var dailyfileshint=			'Seleciona para usar limas di\u00e1rias no formato AAAAMMDD.xml em vez de uma \u00fanica lima de tv.xml.';
+var highlightclickablelabel =	'Destaque ligou programas';
+	var highlightclickablehint ='Os programas do destaque que s\u00e3o ligados a um URL (ajustou-se acima). O tipo de destaque depende do stylesheet. Recomenda-se incapacitar este se todos os programas forem ser liga\u00e7\u00f5es, ou se nenhuns forem.';
+var highlightmovieslabel =		'Filmes destaque avaliou em ou sobre:';
+	var highlightmovieshint =	'Filmes destaque avaliados ou sobre neste n\u00famero das estrelas. O tipo de destaque depende do stylesheet, mas é geralmente uma cor mais brilhante. Isto é separado da categoria que destaca abaixo.';
+var highlightnewlabel =			'Mostras novas destaque';
+	var highlightnewhint =		'Ddestaque mostra quais est\u00e3o arejando para a primeira vez. O destaque é geralmente uma beira mais escura ou mais grossa.';
+var printdateslabel =			'Libera\u00e7\u00e3o do filme mostra data';
+	var printdateshint =		'Libera\u00e7\u00e3o do filme mostra data na grade. Isto é separado das datas no popup, e aplica-se somente aos filmes.';
+var twelvehourlabel =			'Use twelve-hour clock';
+	var twelvehourhint =		'Use twelve-hour (with AM and PM) instead of twenty-four-hour clock.';
+var showclocklabel =			'Show clock in upper right';
+	var showclockhint =			'Check to show current time and date in the top right of page.';
+var showbarclocklabel =			'Show clock in top bar';
+	var showbarclockhint =		'Check to show current time in the top bar.';
+
+var reloadbutton =				'Reload';
+
+var monthnames =				new Array('janeiro', 'fevereiro', 'mar\u00e7o', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro');
+var daynames =					new Array('domingo', 'segunda', 'ter\u00e7a', 'quarta', 'quinta', 'sexta', 's\u00e1bado');
+var dayletters =				new Array('D', 'S', 'T', 'Q', 'Q', 'S', 'S');
+
+var alllabel =					'Tudo';
+var nonelabel =					'Nenhum';

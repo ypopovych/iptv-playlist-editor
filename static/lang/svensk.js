@@ -1,0 +1,92 @@
+var loadingtext =				'Ladda';
+var errortext =					'Felet';
+var filetext =					'Sparar';
+var notfoundtext =				'inte funnit';
+
+var preferenceslink =			'Preferenser';
+var datepickerbutton =			'G\u00E5!';
+var earliertext =				'Tidigare';
+var latertext =					'Mer sistn\u00E4mnd';
+
+var gridtab =					'Raster';
+var displayhourslabel =			'Sk\u00e4rmtimmar';
+	var displayhourshint =		'V\u00e4ljer numrera av timmar f\u00f6r att visa.';
+var autosizelabel =				'Automatiskt bordl\u00e4gger storleksanpassar';
+	var autosizehint =			'Kontrollen som automatiskt v\u00e4ljer en bordl\u00e4ggabredd som baseras p\u00e5, numrerar av kolonner. Uncheck som m\u00f6jligg\u00f6r det n\u00e4sta f\u00e4ltet.';
+var tablewidthlabel =			'Bordl\u00e4gger bredd (i PIXEL)';
+	var tablewidthhint =		'Specificerar bredden av bordl\u00e4gga i PIXEL. Kontrollera det ovann\u00e4mnt boxas till upps\u00e4ttningen detta automatiskt.';
+var offsetminuteslabel =		'Start med den n\u00e4sta timmen efter';
+	var offsetminuteshint =		'Upps\u00e4ttning som minutdelen av tiden, efter som rastret skar start med den n\u00e4sta timmen p\u00e5 initialt, laddar.';
+var refreshonthelabel =			'F\u00f6rnya varje timme p\u00e5';
+	var refreshonthehint =		'XSLTv kan automatiskt f\u00f6rnya f\u00f6rteckningarna varje timme till uppeh\u00e4llet det aktuella rastret, om browseren h\u00e5lls \u00f6ppen. V\u00e4lj tiden varje timme att utf\u00f6ra f\u00f6rnyelsen.'
+	var norefreshoption =		'F\u00f6rnya inte';
+var timebarfrequencylabel = 	'Time Bar Frequency';
+	var timebarfrequencyhint =	'How often to repeat the time header row.';
+	var toponlyoption =			'Top Line Only';
+	
+var popupstab =					'Popups';
+var channelpopupslabel =		'Kanaliserar Popups';
+	var channelpopupshint =		'Kontrollen som m\u00f6jligg\u00f6r popupsna, n\u00e4r musen \u00e4r \u00f6ver kanalisera, namnger.';
+var descriptionpopupslabel =	'Beskrivning Popups';
+	var descriptionpopupshint =	'Kontroll som m\u00f6jligg\u00f6r popupsna, n\u00e4r musen \u00e4r \u00f6ver ett program.';
+var popupdelaylabel =			'Popup f\u00f6rsenar (i ms)';
+	var popupdelayhint =		'Upps\u00e4ttning som f\u00f6rsena i millisekunder f\u00f6r popups skar syns. Upps\u00e4ttningen p\u00e5 0 som ska inaktiveras, f\u00f6rsenar.';
+var popuptimeslabel =			'Tider';
+	var popuptimeshint =		'Kontroll som visar start och som avslutar tider i programpopupsna.';
+var popupratinglabel =			'Tjalla';
+	var popupratinghint =		'Kontroll som visar MPAA-v\u00e4rderingar i programpopupsna.';
+var popupsubtitlelabel =		'Textar';
+	var popupsubtitlehint =		'Kontrollen som visar program, textar i programpopupsna.';
+var popupdescriptionlabel =		'Beskrivning';
+	var popupdescriptionhint =	'Kontroll som visar programbeskrivningar i programpopupsna.';
+var popupdatelabel =			'Daterar';
+	var popupdatehint =			'Kontrollen som ska visas, daterar i programpopupsna. Daterar \u00e4r endera frig\u00f6raren daterar f\u00f6r movies, eller f\u00f6rsta-luftat daterar f\u00f6r shows.';
+var popupcategorieslabel =		'Kategorier';
+	var popupcategorieshint =	'Kontroll som visar showkategorier eller genres i programpopupsna.';
+var popupstarratinglabel =		'Star som tjaller';
+	var popupstarratinghint =	'Kontroll som visar en grafisk star som tjaller i programpopupsna.';
+
+var localoptionstab =			'Lokala alternativ';
+var languagelabel =				'Spr\u00e5k';
+var fixgapslabel =				'Fast mellanrum i f\u00f6rteckningar';
+	var fixgapshint =			'Kontroll som m\u00f6jligg\u00f6r mellanrum-uppt\u00e4ckt i f\u00f6rteckningar som inte \u00e4r sammanh\u00e4ngande. Detta alternativ kr\u00e4ver f\u00f6rteckningar att sorteras med --by-channel f\u00f6r att fungera. Detta alternativ skar orsakar f\u00f6rteckningar f\u00f6r att ladda mycket l\u00e5ngsammare, s\u00e5 kontrollerar inte on\u00f6digt.';
+	var fixgapsconfirm =		'Att fylla mellanrum i f\u00f6rteckningar, ser till var god XMLEN sparar har sorterats med --by-channel alternativ!';
+var absoluteiconslabel =		'Den absoluta symbolen h\u00e4nvisar till';
+	var absoluteiconshint =		'XSLTv s\u00f6ker efter kanaliserar symboler i \u201dicons\u201d arkivet. Kontrollera detta boxas, om din xml sparar inneh\u00e5ller absolut url h\u00e4nvisar till till symboler.';
+var dayfirstlabel =				'Sk\u00e4rmdagen f\u00f6rst i daterar';
+	var dayfirsthint =			'Kontrollen som denna boxas f\u00f6r att visa, daterar i dd/mm/aaaa formaterar. Uncheck f\u00f6r mm/dd/aaaa formaterar.';
+var grabberlabel =				'Grabber: tv_grab_';
+	var grabberhint =			'V\u00e4ljer din grabber att applicera lokaliserat kanalisera-namnger inst\u00e4llningar.';
+
+var otheroptionstab =			'Andra alternativ';
+var loadonclicklabel =			'Klickar p\u00e5:';
+	var loadonclicknothing =	'G\u00f6r ingenting';
+	var loadonclickIMDB =		'S\u00f6kande IMDB';
+	var loadonclickURL =		'URL i XML';
+var categorycolorslabel =		'Kategori som markerar';
+	var categorycolorshint=		'Att m\u00f6jligg\u00f6ra att markera f\u00f6r kategori (f\u00e4rger m\u00e5ste definieras i CSS sparar). V\u00e4ljer bort f\u00f6r en liten rusad f\u00f6rb\u00e4ttring.';
+var dailyfileslabel =			'Bruk sparar dagligen';
+	var dailyfileshint=			'Att anv\u00e4nda dagligen sparar i formatera AAAAMMDD.xml i st\u00e4llet f\u00f6r en singel tv.xml sparar.';
+var highlightclickablelabel =	'Viktig ankn\u00f6t program';
+	var highlightclickablehint ='Markera program som anknytas till en URL (upps\u00e4ttning \u00f6ver). Typen av att markera beror p\u00e5 stylesheeten. Det rekommenderas f\u00f6r att inaktivera detta, om alla program \u00e4r att vara anknyter, eller om inga \u00e4r.';
+var highlightmovieslabel =		'Viktigmovies som tjallas p\u00e5 eller \u00f6ver:';
+	var highlightmovieshint =	'Numrerar viktigmovies som tjallas p\u00e5 eller \u00f6ver denna, av stars. Typen av att markera beror p\u00e5 stylesheeten, men \u00e4r allm\u00e4nt en ljusare f\u00e4rg. Detta \u00e4r separat fr\u00e5n kategorien som under markerar.';
+var highlightnewlabel =			'Nya shows f\u00f6r viktig';
+	var highlightnewhint =		'Viktigshows som luftar f\u00f6r den f\u00f6rsta tiden. Markera \u00e4r allm\u00e4nt ett m\u00f6rkare, eller mer tjock gr\u00e4nsa.';
+var printdateslabel =			'Visa att moviefrig\u00f6raren daterar';
+	var printdateshint =		'Daterar Showmoviefrig\u00f6raren i rastret. Detta \u00e4r separat fr\u00e5n daterar i popupen och applicerar endast till movies.';
+var twelvehourlabel =			'Use twelve-hour clock';
+	var twelvehourhint =		'Use twelve-hour (with AM and PM) instead of twenty-four-hour clock.';
+var showclocklabel =			'Show clock in upper right';
+	var showclockhint =			'Check to show current time and date in the top right of page.';
+var showbarclocklabel =			'Show clock in top bar';
+	var showbarclockhint =		'Check to show current time in the top bar.';
+
+var reloadbutton =				'Tillbakal\u00e4ggande';
+
+var monthnames =				new Array('januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december');
+var daynames =					new Array('s\u00f6ndag', 'm\u00e5ndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'l\u00f6rdag');
+var dayletters =				new Array('S', 'M', 'T', 'O', 'T', 'F', 'L');
+
+var alllabel =					'Alla';
+var nonelabel =					'Inga';

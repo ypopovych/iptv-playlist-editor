@@ -1,0 +1,92 @@
+var loadingtext =				'Laden';  
+var errortext =					'Fehler';  
+var filetext =					'Akte';  
+var notfoundtext =				'finden Sie nicht';  
+  
+var preferenceslink =			'Vorlieben';  
+var datepickerbutton =			'Gehen Sie!';  
+var earliertext =				'Fr\u00fcher';  
+var latertext =					'Sp\u00e4ter';  
+  
+var gridtab =					'Gitter';  
+var displayhourslabel =			'Zeigen Sie Stunden';  
+var displayhourshint =			'W\u00e4hlen Sie die Anzahl von Stunden zu Demonstration aus.';  
+var autosizelabel =				'Automatische Tischgr\u00f6\u00dfe';  
+var autosizehint =				'Scheck, um automatisch eine auf Anzahl von S\u00e4ulen basierende Tischweite auszuw\u00e4hlen. Uncheck, um dem n\u00e4chsten Feld zu erm\u00f6glichen.';  
+var tablewidthlabel =			'Tischweite (in Pixeln)';  
+var tablewidthhint =			'Spezifizieren Sie die Weite des Tisches in Pixeln. \u00fcberpr\u00fcfen Sie die oben erw\u00e4hnte Kiste, um dieses automatisch zu setzen.';  
+var offsetminuteslabel =		'Anfang mit n\u00e4chster Stunde nach';  
+var offsetminuteshint =			'Setzen Sie den Minutenteil der Zeit, nach dem das Gitter mit der n\u00e4chsten Stunde mit anf\u00e4nglicher Last anfangen wird.';  
+var refreshonthelabel =			'Erneuern Sie jede Stunde bei';
+	var refreshonthehint =		'XSLTv kann die Auflistungen jede Stunde automatisch erneuern, um das Rasterfeld aktuell zu halten, wenn die Datenbanksuchroutine ge\u00f6ffnet gehalten wird. W\u00e4hlen Sie die Zeit jede Stunde vor, erneuern durchzuf\u00fchren.'
+	var norefreshoption =		'Erneuern Sie nicht';
+var timebarfrequencylabel = 	'Time Bar Frequency';
+	var timebarfrequencyhint =	'How often to repeat the time header row.';
+	var toponlyoption =			'Top Line Only';
+	
+var popupstab =					'Popups';  
+var channelpopupslabel =		'Leiten Sie des Popups';  
+var channelpopupshint =			'Scheck, um dem popups zu erm\u00f6glichen, wenn die Maus \u00fcber den Kanalnamen ist.';  
+var descriptionpopupslabel =	'Beschreibung Popups';  
+var descriptionpopupshint =		'Scheck, um dem popups zu erm\u00f6glichen, wenn die Maus \u00fcber einem Programm ist.';  
+var popupdelaylabel =			'Popup Delay (in ms)';  
+var popupdelayhint =			'Setzen Sie die Verz\u00f6gerung in milliseconds vor popups, wird erscheinen. Satz bei 0, die Verz\u00f6gerung lahmlegten.';  
+var popuptimeslabel =			'Zeiten';  
+var popuptimeshint =			'Scheck, um zu zeigen, beginnt und endet, timt im Programm popups.';  
+var popupratinglabel =			'Klasse';  
+var popupratinghint =			'Scheck, um MPAA-Klassen in den Programm popups zu zeigen.';  
+var popupsubtitlelabel =		'Untertitel';  
+var popupsubtitlehint =			'Scheck, um zu zeigen, programmiert Untertitel im Programm popups.';  
+var popupdescriptionlabel =		'Beschreibung';  
+var popupdescriptionhint =		'Scheck, um zu zeigen, programmiert Beschreibungen im Programm popups.';  
+var popupdatelabel =			'Datum';  
+var popupdatehint =				'Scheck, um Daten in den Programm popups zu zeigen. Daten sind, lassen Sie entweder Daten f\u00fcr Filme oder zuerst gel\u00fcftete Daten f\u00fcr Shows frei.';  
+var popupcategorieslabel =		'Arten';  
+var popupcategorieshint =		'Scheck, um zu zeigen, zeigt Arten oder Genres in den Programm popups.';  
+var popupstarratinglabel =		'Star Rating';  
+var popupstarratinghint =		'Scheck, um in den Programm popups eine graphische Sternklasse zu zeigen.';  
+  
+var localoptionstab =			'\u00f6rtliche M\u00f6glichkeiten';  
+var languagelabel =				'Sprache';  
+var fixgapslabel =				'Reparieren Sie L\u00fccken in Auflistungen';  
+var fixgapshint =				'Scheck, um L\u00fcckenentdeckung in Auflistungen zu erm\u00f6glichen, die nicht aneinandergrenzend sind. Diese M\u00f6glichkeit verlangt Auflistungen, um damit sortiert zu werden, durch-Weg nach der Arbeit. Diese M\u00f6glichkeit wird Auflistungen veranlassen, viel langsamer zu laden, so \u00fcberpr\u00fcfen Sie nicht unn\u00f6tigerweise.';  
+var fixgapsconfirm =			'Um L\u00fccken in Auflistungen zu f\u00fcllen, bitte stellen Sie sicher, da\u00df die XML-Akte damit sortiert worden ist, das, --by-channel M\u00f6glichkeit! ';  
+var absoluteiconslabel =		'Absolute Ikonenhinweise';  
+var absoluteiconshint =			'XSLTv sucht Kanalikonen darin ein \'icons\' Verzeichnis. \u00fcberpr\u00fcfen Sie diese Kiste, wenn Ihre xml-Akte absolute url-Hinweise zu Ikonen enth\u00e4lt.';  
+var dayfirstlabel =				'Zeigen Sie zuerst Tag in Daten';  
+var dayfirsthint =				'\u00fcberpr\u00fcfen Sie diese Kiste, um Daten in TT/MM/JJJJ-Format zu zeigen. Uncheck f\u00fcr MM/TT/JJJJ-Format.';  
+var grabberlabel =				'Habgieriger: tv_grab_';  
+var grabberhint =				'W\u00e4hlen Sie Ihren habgierigen aus, lokalisierte Kanalname-Rahmen anzuwenden.';  
+  
+var otheroptionstab =			'Andere M\u00f6glichkeiten';  
+var loadonclicklabel =			'Auf Klicken: ';  
+var loadonclicknothing =		'Machen Sie Nothing';  
+var loadonclickIMDB =			'IMDB-Suche';  
+var loadonclickURL =			'URL in des XML';  
+var categorycolorslabel =		'Art Highlighting';  
+var categorycolorshint=			'W\u00e4hlen Sie aus, Art zu erm\u00f6glichen, die hervorhebt, (Farben m\u00fcssen in CSS-Akten definiert werden). Deselect f\u00fcr eine kleine Geschwindigkeitsverbesserung.';  
+var dailyfileslabel =			'Benutzen Sie t\u00e4gliche Akten';  
+var dailyfileshint=				'W\u00e4hlen Sie aus, t\u00e4gliche Akten im Format JJJJMMTT.xml statt einer einzelnen tv.xml-Akte zu benutzen.';  
+var highlightclickablelabel =	'Highlight verband Programme';  
+	var highlightclickablehint ='H\u00f6hepunktprogramme, die mit einem URL verbunden werden, die oben gesetzt werden. Die Art vom Hervorheben h\u00e4ngt vom stylesheet ab. Es wird empfohlen, dieses lahmzulegen, wenn alle Programme Golfplatz gewesen werden sollten, oder wenn keine sind.';  
+var highlightmovieslabel =		'H\u00f6hepunktfilme z\u00e4hlten dabei oder hin\u00fcber:';  
+	var highlightmovieshint =	'H\u00f6hepunktfilme z\u00e4hlten bei oder \u00fcber dieser Anzahl von Sternen. Die Art vom Hervorheben hängt vom stylesheet ab, aber ist im allgemeinen eine hellere Farbe. Dies ist getrennt von der Art, die unten hervorhebt.';  
+var highlightnewlabel =			'Highlight neue Shows';  
+	var highlightnewhint =		'H\u00f6hepunktshows, die zu dem ersten Mal lüften. Das Hervorheben ist im allgemeinen eine dunklere oder dickere Grenze.';  
+var printdateslabel =			'Showfilm Freilassungsdaten';  
+	var printdateshint =		'Showfilm Freilassungsdaten im Gitter. Dies ist Einzelteil von den Daten im popup und gilt nur f\u00fcr Filme.';  
+var twelvehourlabel =			'Use twelve-hour clock';
+	var twelvehourhint =		'Use twelve-hour (with AM and PM) instead of twenty-four-hour clock.';
+var showclocklabel =			'Show clock in upper right';
+	var showclockhint =			'Check to show current time and date in the top right of page.';
+var showbarclocklabel =			'Show clock in top bar';
+	var showbarclockhint =		'Check to show current time in the top bar.';
+ 
+var reloadbutton =				'Laden Sie nach';  
+  
+var monthnames =				new Array('Januar','Februar','M\u00e4rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember');  
+var daynames =					new Array('Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag');
+var dayletters =				new Array('S', 'M', 'D', 'M', 'D', 'F', 'S');
+
+var alllabel =					'Alle';
+var nonelabel =					'Kein';

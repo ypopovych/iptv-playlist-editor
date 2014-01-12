@@ -1,0 +1,153 @@
+03/08/2013	1.31 release
+
+03/08/2013  Small change to get Chrome & IE to work again
+
+07/06/2008	1.3 release
+
+07/05/2008	Small change because the Mozilla people changed something in Firefox 3
+
+03/11/2008	1.2 release
+
+03/11/2008	Added another "bonus" language. N.B. http://www.logarithmic.net/pfh-files/blog/01173253837/rot180.html and http://rishida.net/scripts/uniview/conversion.php
+03/11/2008	Added option to toggle top-bar and top-right clocks
+03/10/2008	Added clock to top bar
+03/10/2008	Added Czech language (thanks to Martin Kiklhorn, martin at hej dot cz)
+03/10/2008 	Added option to repeat time-bar every 5- 10- etc. rows.
+03/10/2008	Added 12/24 hour clock option
+
+02/13/2007	1.1 release
+
+02/01/2007	Several new stylesheets
+01/06/2007	IE7 compatibility
+
+06/16/2006	1.0 release
+
+06/16/2006	Localized the time-and-date display, since javascript's local date function "toLocaleString()" doesn't really work.
+06/16/2006	Added the ability to automatically refresh listings hourly.
+
+03/19/2006	0.95 release (because I'm scared of 1.0!)
+
+03/19/2006	Added some more (bad) translations. Translated the "all" and "none"
+03/19/2006	Fixed a bug where the calendar iframe sometimes was not hidden.
+03/16/2006	Added the option to display movie release dates within the grid. Good idea from wdreamsmaycome.
+03/16/2006	Added an optional class "Newshow" for programs that are being aired for the first time today. I will use border for newshow, background-color for goodmovie, and text-color/decoration plus pointer and hover for clickable.
+03/15/2006	Added an optional class "Goodmovie" for movies rated better than a selectable star-rating. Thanks to wdreamsmaycome. I didn't add this to the TitanTV stylesheet, but all others have some sort of background-color indicator.
+03/15/2006	Half-stars are only displayed if the decimal part of a rating is 5 or greater, instead of any decimal.
+03/14/2006	Changed the dropdown to military time instead of AM/PM. Matches the top row better. And I like it better. My wife will probably be sad, though.
+03/11/2006	Spanish file (espanol.js) by raul24 substituted for my very-bad file. Thanks!
+03/10/2006	Added an optional class "Clickable" which is set for programs that have an onclick attribute. This is reflected with a text color and pointer change in most stylesheets.
+03/10/2006	Switched back to onclick for programs from <a> and updated stylesheets.
+03/10/2006	Fixed the stylesheets so the starrating is not indented in IE. Ratings of up to ten stars will fit without wrapping.
+
+03/05/2006	0.9 release
+
+03/05/2006	Removed the bashscripts directory until 1.0 - need to revamp to take advantage of daily file capability.
+03/05/2006	Added a prefix to all the cookie names to avoid conflicts (with Jinzora, the best music app around).
+03/04/2006	Added support for tv_grab_huro. I couldn't get any actual listings, though, just channels.
+03/04/2006	Movies now tagged correctly for German grabber tv_grab_de. (Categories which are numeric are movies.)
+03/03/2006	Switched from "onclick" to simple anchors for programs. This makes it possible to put javascript: events in the links.
+03/03/2006	German translation and support for tv_grab_de. Still need categories. This file has a lot of them, and movies have the release year in their category field.
+03/03/2006	Small speed tweak
+03/03/2006	Added some "bonus" languages.
+03/02/2006	Put the preferences into four tabs. Looks good.
+03/02/2006	Added a dropdown to select language. This preferences box is out of control.
+03/02/2006	Abstracted all English-language text into a separate file and prepared Spanish and French translations. They are both probably very very bad.
+
+03/01/2006	0.8 release
+
+02/28/2006	Added choice of what to do on clicking a program: Search IMDB, Go to the <url> specified in XML, or do nothing. If the URL is malformed, you will see errors in IE for sure.
+02/28/2006	Added preferences for category coloring and daily versus global file.
+02/28/2006	Rudimentary support for loading daily files in the format YYYYMMDD.xml instead of one tv.xml.
+02/28/2006	The program popups can now handle newline characters; they will be converted to <br/>. This must be manually enabled in the top of tv.xsl.
+02/27/2006	Made the sort order of channels automatically depend on the grabber selection.
+02/27/2006	Added an iframe under the preferences and the calendar so the select boxes won't show through in IE.
+02/24/2006	Moved a bunch of javascript into separate file, moved a bunch of style info into separate files.
+
+02/21/2006	0.75 release
+
+02/21/2006	Fixed padding-left so category list isn't indented in IE. Oops.
+02/21/2006	Unicode-ed accented characters to keep from breaking IE. Oops.
+02/21/2006	Made calendar link display in IE. Oops.
+02/21/2006	Made popup settings work in IE. Oops.
+
+02/20/2006	0.7 release
+
+02/20/2006	Added limited support for Swedish-language listings.
+02/20/2006	Added an option to toggle between mm/dd/yyyy (America) and dd/mm/yyyy (Everywhere else).
+02/19/2006	Added tooltips for all preferences fields.
+02/18/2006	Added a calendar widget to make the date selection easier, and made the preferences window relative to mouse position instead of absolute.
+02/18/2006	Added options to enable/disable nearly everything in the popup.
+02/18/2006	Moved the stylesheet selector out of the preferences to the top of the grid (it is one of my most used fields)
+02/18/2006	Added a date/time picker at the top of the grid. This has the side effect of reporting the date the listings are for.
+02/18/2006	Added the date to the clock in the upper right
+02/17/2006	Made the AOL category icons taller to make IE look better.
+02/17/2006	Added categories and star-ratings to popup.
+
+02/14/2006	0.6 release
+
+02/14/2006	Made the gap killer cause a confirm dialog instead of merely an alert.
+02/14/2006	Added a few grabber-specific options for channel labels.
+02/14/2006	Added option for starting display with the next hour after a certain time (e.g. if you load after 6:45, start the listings with 7:00 instead of 6:00)
+02/13/2006	Added lots of options for popups and icons
+02/11/2006	Part of the gap-killer was being invoked always, causing a slowdown. Made it conditional.
+
+02/07/2006	0.5 release
+
+02/07/2006	Stylesheet dropdown now always reflects current style. Also, it doesn't crash IE. Submit button has been replaced with a link.
+02/06/2006	Fixed the topleftcorner goofyness in AOL on IE
+02/06/2006	Fixed the extendleft and extendright image replacement on IE
+02/06/2006	If there is no stop time on the last programme on a channel, it will display until the right edge of the grid, always. Wrong, but better than broken.
+02/05/2006	Put a check in to draw "???" if there is no stop time (instead of default, NaN).
+02/05/2006	Added an optional "gap killer" for listings that do not have contiguous programmes. This requires xml to be sorted with --by-channel.
+02/05/2006	Made the top timebar into links to set clicked time to start time.
+
+02/04/2006	0.4 release
+
+02/04/2006	Fixed a bug in the weekly bash script
+02/04/2006	Fixed a bug with browsers that don't detect MIME types right. Thanks to Fred, again, at http://ericandchar.com/bb/viewtopic.php?p=22
+02/03/2006	Whole cookie-based error-checked system for controlling grid width (pixels and columns) added and working.
+02/02/2006	Preference (cookie-based) for number-of-hours-to-display setting working.
+
+02/02/2006	0.3 release
+
+02/02/2006	Added the xmltv dtd to the package; IE won't load the xml without it.
+02/02/2006	Fixed the menu popup styles for IE.
+02/02/2006	Changed the menu/clock position to absolute from fixed, because IE can't handle fixed.
+02/02/2006	Fixed the stylesheet switcher in IE. Now, though, a "change" is required to switch stylesheets, so selecting AOL (the first style) is a two-step process.
+02/02/2006	Updated the stylesheets to take advantage of the datadirect id codes. Most sheets now use a combination of category and id classes for best results (in USA only?)
+02/01/2006	Added a class to each program from the datadirect id code: MV=movie, SP=sports, SH=show (one time), EP=episode (of recurring series). These presumably do not exist in foreign versions (?). The SP category doesn't work very well, it doesn't catch recurring sports shows which probably should be highlighted.
+02/01/2006	Fixed the popup images with some conditional code in the XSL
+02/01/2006	Fixed the popups on refresh in IE.
+02/01/2006	Added IE support (!). Following problems still exist:
+			(fixed)Popups don't reload after switching the time in IE.
+			(fixed)Stylesheet switcher doesn't work in IE (onclick on selectbox options not allowed)
+			(fixed)Apparently multiple classes don't work in IE - all longshows are tagged as movies.
+			(fixed)Fieldsets are colored differently in IE; looks dumb.
+			(fixed)Absent images appear as broken in popups in IE instead of just disappearing as they do in firefox.
+			(changed)position:fixed doesn't work in IE. I'll probably just change things to absolute.
+
+01/31/2006	0.21 bugfix release
+
+01/31/2006	Fixed a bug that broke everything. Thanks to Fred at http://www.ericandchar.com/bb/viewtopic.php?t=5
+
+01/19/2006	0.2 release
+
+01/19/2006	Put a cursor:pointer in the css for upper-left and -right cells to make them feel more "linky." Couldn't use an <a> because most stylesheets use a background image.
+01/19/2006	Added code to generate an empty cell if there is no program in a row at all (for-each loop is not entered)
+01/19/2006	Added a striped "empty" graphic for the background of cells with no data.
+01/18/2006	Added code to generate an empty cell if there is no program at the beginning or end of the grid, fixing display problems with an incomplete XML file. Internal shows are expected to be contiguous, this only fixes borders.
+01/18/2006	Put the stylesheet selector in a DHTML popup which will eventually contain a complete preferences set. Changed position of clock and preferences to "fixed."
+01/16/2006	Added "Mystery" to the list of categories counted as movies.
+01/16/2006	Increased complexity of BASH scripts to yield smaller xml files. There is now a weekly, daily, and hourly script to be run with cron. These are optional but do help speed quite a lot. They may cause problems if you watch a lot of TV around midnight.
+			tvweekly.sh downloads the week's tv listings, sorts them, and divides them into seven daily files. It then immediately calls tvdaily.sh. This should be run at a random time according to zap2it's request.
+			tvdaily.sh copies the current day's file (###.xml) to tv.xml and deletes yesterday's file. Run just after midnight.
+			tvhourly.sh applies tv_grep --on-after (an hour ago) to reduce the file size throughout the day. Run about half past the hour.
+01/15/2006	Added xsl params to disable popups, categories, and imdb links. Turning these off yield small speed improvements.
+01/13/2006	Minor optimizations to XPATH functions to increase speed (renders about 3x faster now).
+01/11/2006	Added a "Loading..." indicator (doesn't work when changing pages, only when completely reloading).
+01/11/2006	Converted to asychronous loading which reduces the amount of time the UI appears frozen. The actual transformation must be done synchronously.
+01/07/2006	Added tv.sh, a bash script which I use to automate xml downloads.
+01/07/2006	Corrected typos in titantv.tv.css
+01/07/2006	Corrected typos in meevee.tv.css
+
+01/06/2006	0.1 initial release
