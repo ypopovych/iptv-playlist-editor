@@ -1,7 +1,7 @@
 #!/bin/sh
 BASEDIR=$( cd $(dirname $0) ; pwd -P )
 URL1="http://www.teleguide.info/download/new3/xmltv.xml.gz"
-URL2="http://www.vipiko.tv/get/?cur-xtv-xml"
+URL2="http://www.vipiko.tv/get?act-xtv-tgz"
 
 TEMP="$TMPDIR"
 
@@ -13,9 +13,10 @@ mkdir $TEMP/xmltv
 cd $TEMP/xmltv
 curl -o xmltv.xml.gz $URL1
 gunzip xmltv.xml.gz
-curl -o second.xml $URL2
+curl -o second.tgz $URL2
+tar zxvf second.tgz
 cat xmltv.xml | tv_grep --on-after now | tv_sort --by-channel > tg.xml
-cat second.xml | tv_grep --on-after now | tv_sort --by-channel > vp.xml
+cat tvguide.xml | tv_grep --on-after now | tv_sort --by-channel > vp.xml
 python xmltvmerger.py tg.xml vp.xml temp.xml
 cat temp.xml | tv_sort --by-channel > tv.xml
 mv tv.xml $BASEDIR/../static/
