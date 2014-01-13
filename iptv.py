@@ -172,7 +172,7 @@ def main(query, start_response, static_url):
         debug = DEBUG
 
     if debug:
-        print_unicode(data).encode('utf-8')
+        print_unicode(data)
         print_unicode("Static url: "+static_url)
         start_response('200 OK', [('Content-Type','text/plain')])
     else:
