@@ -16,7 +16,7 @@ from PIL import Image
 def parse(input_xml, output_py, icon_dir):
     root = None
     output_py = open(output_py, "wt")
-    name = None
+    names = None
     icon = None
     output_py.write("# -*- coding: utf-8 -*-\nXMLTV_CHANNELS = [\n")
     input_xml = open(input_xml, "rt")
@@ -25,31 +25,43 @@ def parse(input_xml, output_py, icon_dir):
             if root is None:
                 root = elem
             if elem.tag == "channel":
-                name = None
+                names = []
                 icon = None
         if event == "end":
             if elem.tag == "channel":
-                if icon_dir is not None and icon is not None:
-                    ext = icon[icon.rfind('.'):].lower()
-                    icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
-                    if ext != ".png":
-                        try:
-                            buff = StringIO(urllib2.urlopen(icon).read())
-                            img = Image.open(buff)
-                            img.save(icn_path)
-                        except Exception, e:
-                            print "Load failed:", icon, "error: ", e
-                    else:
-                        try:
-                            icn = open(icn_path, "wb")
-                            icn.write(urllib2.urlopen(icon).read())
-                            icn.close()
-                        except:
-                            pass
-                if name is not None:
+                img = None
+                for name in names:
                     output_py.write("    u'"+name.encode('utf-8')+"',\n")
+                    if img is None:
+                        if icon_dir is not None and icon is not None:
+                            ext = icon[icon.rfind('.'):].lower()
+                            if ext != ".png":
+                                try:
+                                    buff = StringIO(urllib2.urlopen(icon).read())
+                                    img = Image.open(buff)
+                                except Exception, e:
+                                    print "Load failed:", icon, "error: ", e
+                            else:
+                                try:
+                                    img = urllib2.urlopen(icon).read()
+                                except Exception, e:
+                                    print "Load failed:", icon, "error: ", e
+                    else:
+                        icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
+                        if isinstance(img, Image):
+                            try:
+                                img.save(icn_path)
+                            except Exception, e:
+                                print "Save failed:", icon, "error: ", e
+                        else:
+                            try:
+                                icn = open(icn_path, 'wb')
+                                icn.write(img)
+                                icn.close()
+                            except Exception, e:
+                                print "Write failed:", icon, "error: ", e
             elif elem.tag == "display-name":
-                name = elem.text
+                names.extend(elem.text)
             elif elem.tag == "icon":
                 icon = elem.get('src')
             root.clear()
