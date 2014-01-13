@@ -21,6 +21,10 @@ except ImportError:
     XMLTV_CHANNELS_PATCH = {}
 
 
+def print_unicode(data):
+    print unicode(data).encode('utf-8')
+
+
 mimetypes.init()
 STATIC_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
 M3U_RE = re.compile('\s*([\w\-]+?)="(.*?)"', re.I | re.U)
@@ -129,13 +133,13 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m
                             tvg_name = params.get('tvg-name', name)
                             name_patched = False
                             if debug:
-                                print 'Not found: ', tvg_name
+                                print_unicode('Not found: ' + unicode(tvg_name))
                     params['tvg-name'] = tvg_name.strip().replace(' ', '_')
             if name_patched or not params.has_key('tvg-logo'):
                 params['tvg-logo'] = params['tvg-name'].strip().replace('_', '').replace('/','_')
 
             if debug:
-                print "Name: ", name, " TVG: ", params.get('tvg-name')
+                print_unicode("Name: "+unicode(name)+" TVG: "+unicode(params.get('tvg-name')))
 
             response.append(create_m3u_info_line(name, params))
         elif not line.startswith("#"):
@@ -162,13 +166,14 @@ def static(fl, start_response):
 
 def main(query, start_response, static_url):
     data = dict(parse_qsl(query))
-    print unicode(data).encode('utf-8')
     try:
         debug = (data['d'] == '1')
     except KeyError:
         debug = DEBUG
 
     if debug:
+        print_unicode(data).encode('utf-8')
+        print_unicode("Static url: "+static_url)
         start_response('200 OK', [('Content-Type','text/plain')])
     else:
         start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
@@ -228,8 +233,8 @@ def main(query, start_response, static_url):
 
 
 def application(env, start_response):
-    print unicode(env).encode('utf-8')
     if env['PATH_INFO'].startswith('/static'):
         return static(env['PATH_INFO'][8:], start_response)
     else:
-        return main(env.get("QUERY_STRING", ""), start_response, "http://"+env.get("HTTP_HOST", "")+"/static")
+        return main(env.get("QUERY_STRING", ""), start_response,
+                    env.get('UWSGI_SCHEME', 'http')+"://"+env.get("HTTP_HOST", "")+env.get('PATH_INFO', '/')+"static")
