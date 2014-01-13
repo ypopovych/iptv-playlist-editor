@@ -34,6 +34,7 @@ def parse(input_xml, output_py, icon_dir):
                     output_py.write("    u'"+name.encode('utf-8')+"',\n")
                     if img is None:
                         if icon_dir is not None and icon is not None:
+                            print "Icon updated", icon
                             ext = icon[icon.rfind('.'):].lower()
                             if ext != ".png":
                                 try:
@@ -46,9 +47,10 @@ def parse(input_xml, output_py, icon_dir):
                                     img = urllib2.urlopen(icon).read()
                                 except Exception, e:
                                     print "Load failed:", icon, "error: ", e
-                    else:
+                    if img is not None:
                         icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
-                        if isinstance(img, Image):
+                        print "Write to file:", icn_path
+                        if isinstance(img, Image.Image):
                             try:
                                 img.save(icn_path)
                             except Exception, e:
