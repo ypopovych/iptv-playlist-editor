@@ -48,7 +48,7 @@ def parse(input_xml, output_py, icon_dir):
                                 except Exception, e:
                                     print "Load failed:", icon, "error: ", e
                     if img is not None:
-                        icn_path = os.path.join(icon_dir, name.strip().replace(' ', '').replace('/','_'))+'.png'
+                        icn_path = os.path.join(icon_dir, name.strip().replace('/','_').replace(':','_'))+'.png'
                         print "Write to file:", icn_path
                         if isinstance(img, Image.Image):
                             try:

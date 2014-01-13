@@ -136,7 +136,7 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m
                                 print_unicode('Not found: ' + unicode(tvg_name))
                     params['tvg-name'] = tvg_name.strip().replace(' ', '_')
             if name_patched or not params.has_key('tvg-logo'):
-                params['tvg-logo'] = params['tvg-name'].strip().replace('_', '').replace('/','_')
+                params['tvg-logo'] = params['tvg-name'].strip().replace('/','_').replace(':','_')
 
             if debug:
                 print_unicode("Name: "+unicode(name)+" TVG: "+unicode(params.get('tvg-name')))
