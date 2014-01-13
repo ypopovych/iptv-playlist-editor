@@ -20,7 +20,7 @@ def clean_name(name):
 
 
 def check_name(name, names):
-    matches = difflib.get_close_matches(name, names, cutoff=0.85)
+    matches = difflib.get_close_matches(name, names, cutoff=0.95)
     return matches[0] if len(matches) > 0 else None
 
 
