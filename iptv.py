@@ -7,7 +7,7 @@ from urlparse import parse_qsl
 import difflib
 from urlparse import urlparse
 from settings import (MULTICAST_TO_HTTP_URL, PLAYLISTS_URLS, DEBUG, RADIO_PLAYLISTS_URLS, TV_GUIDE_DATA_URL,
-                      TV_TIMESHIFT, TV_TIMESHIFT_MAX_PRIORITY)
+                      TV_TIMESHIFT, TV_TIMESHIFT_MAX_PRIORITY, NAME_SEARCH_PERCENTS)
 import re
 
 try:
@@ -73,7 +73,7 @@ def radio_playlist(playlist_url, m_to_http=None):
     return response
 
 
-def video_playlist(playlist_url, timeshift, timeshift_max, debug, m_to_http=None):
+def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m_to_http=None):
     playlist = urllib2.urlopen(playlist_url).read()
     lines = playlist.decode("utf-8").splitlines()
     response = []
@@ -111,7 +111,8 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, m_to_http=None
                 except KeyError:
                     tvg_name = params.get('tvg-name')
                     if tvg_name is not None:
-                        names = difflib.get_close_matches(tvg_name.replace('_', ' '), XMLTV_CHANNELS)
+                        names = difflib.get_close_matches(tvg_name.replace('_', ' '), XMLTV_CHANNELS,
+                                                          cutoff=ns_percents)
                         if len(names) > 0:
                             name_patched = True
                             tvg_name = names[0]
@@ -119,7 +120,8 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, m_to_http=None
                             name_patched = False
                             tvg_name = None
                     if tvg_name is None:
-                        names = difflib.get_close_matches(name, XMLTV_CHANNELS)
+                        names = difflib.get_close_matches(name, XMLTV_CHANNELS,
+                                                          cutoff=ns_percents)
                         if len(names) > 0:
                             name_patched = True
                             tvg_name = names[0]
@@ -205,6 +207,11 @@ def main(query, start_response, static_url):
     except KeyError:
         timeshift_max = TV_TIMESHIFT_MAX_PRIORITY
 
+    try:
+        ns_percents = float(data['np'])
+    except:
+        ns_percents = NAME_SEARCH_PERCENTS
+
     if tv_guide_url is not None:
         tv_guide_url = tv_guide_url.replace("{{STATIC}}", static_url)
         response = ['#EXTM3U tvg-url="'+tv_guide_url+'"\n']
@@ -212,7 +219,7 @@ def main(query, start_response, static_url):
         response = ['#EXTM3U\n']
 
     for playlist in playlists:
-        response.extend(video_playlist(playlist, timeshift, timeshift_max, debug, m_to_http))
+        response.extend(video_playlist(playlist, timeshift, timeshift_max, debug, ns_percents, m_to_http))
 
     for playlist in r_playlists:
         response.extend(radio_playlist(playlist, m_to_http))

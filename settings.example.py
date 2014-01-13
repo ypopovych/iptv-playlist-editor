@@ -19,3 +19,6 @@ TV_TIMESHIFT = 0
 
 # TVG timeshift max priority. If True - TV_TIMESHIFT will replace all playlist timeshift values.
 TV_TIMESHIFT_MAX_PRIORITY = False
+
+# Name search equals percents
+NAME_SEARCH_PERCENTS = 0.8
