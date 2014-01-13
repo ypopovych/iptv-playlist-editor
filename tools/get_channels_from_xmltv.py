@@ -61,7 +61,7 @@ def parse(input_xml, output_py, icon_dir):
                             except Exception, e:
                                 print "Write failed:", icon, "error: ", e
             elif elem.tag == "display-name":
-                names.extend(elem.text)
+                names.append(elem.text)
             elif elem.tag == "icon":
                 icon = elem.get('src')
             root.clear()
