@@ -152,21 +152,27 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m
     return response
 
 
-def static(fl, start_response):
+def static(method, fl, start_response):
     old_fl = fl
     fl = os.path.join(STATIC_DIR, fl.replace("../", ''))
     if os.path.isfile(fl):
         start_response('200 OK', [('Content-Type', mimetypes.guess_type(fl)[0])])
+        if method == "head":
+            return []
         return [open(fl).read()]
     elif os.path.isdir(fl):
         start_response('403 Forbidden', [('Content-Type', 'text/plain')])
+        if method == "head":
+            return []
         return ["You can't list files in this directory"]
 
     start_response('404 Not Found', [('Content-Type', 'text/plain')])
+    if method == "head":
+        return []
     return ['File: '+old_fl+" not found on the server"]
 
 
-def main(query, start_response, static_url):
+def main(method, query, start_response, static_url):
     data = dict(parse_qsl(query))
     try:
         debug = (data['d'] == '1')
@@ -179,6 +185,9 @@ def main(query, start_response, static_url):
         start_response('200 OK', [('Content-Type','text/plain')])
     else:
         start_response('200 OK', [('Content-Type','audio/x-mpegurl')])
+
+    if method == "head":
+        return []
 
     try:
         playlists = data["pl"]
@@ -235,8 +244,12 @@ def main(query, start_response, static_url):
 
 
 def application(env, start_response):
+    method = env['REQUEST_METHOD'].lower()
+    if method not in ('get', 'head'):
+        start_response('403 Forbidden')
+        return ['Only GET and HEAD allowed']
     if env['PATH_INFO'].startswith('/static'):
-        return static(env['PATH_INFO'][8:], start_response)
+        return static(method, env['PATH_INFO'][8:], start_response)
     else:
-        return main(env.get("QUERY_STRING", ""), start_response,
+        return main(method, env.get("QUERY_STRING", ""), start_response,
                     env.get('UWSGI_SCHEME', 'http')+"://"+env.get("HTTP_HOST", "")+env.get('PATH_INFO', '/')+"static")
