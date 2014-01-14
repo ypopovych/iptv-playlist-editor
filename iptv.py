@@ -29,6 +29,7 @@ mimetypes.init()
 STATIC_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
 M3U_RE = re.compile('\s*([\w\-]+?)="(.*?)"', re.I | re.U)
 
+
 def update_url(url, m_to_http):
     parts = urlparse(url.strip())
     if parts.scheme in ('udp', 'rtp'):
@@ -80,6 +81,7 @@ def radio_playlist(playlist_url, m_to_http=None):
 def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m_to_http=None):
     playlist = urllib2.urlopen(playlist_url).read()
     lines = playlist.decode("utf-8").splitlines()
+    xmltv_chanels_lower = [ch.lower() for ch in XMLTV_CHANNELS]
     response = []
     for line in lines:
         if line.startswith("#EXTINF:"):
@@ -103,7 +105,7 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m
                     params.update(patch)
                 else:
                     params['tvg-name'] = patch
-                name_patched = True
+                    name_patched = True
             except KeyError:
                 try:
                     patch = XMLTV_CHANNELS_PATCH[name]
@@ -111,24 +113,24 @@ def video_playlist(playlist_url, timeshift, timeshift_max, debug, ns_percents, m
                         params.update(patch)
                     else:
                         params['tvg-name'] = patch
-                    name_patched = True
+                        name_patched = True
                 except KeyError:
                     tvg_name = params.get('tvg-name')
                     if tvg_name is not None:
-                        names = difflib.get_close_matches(tvg_name.replace('_', ' '), XMLTV_CHANNELS,
+                        names = difflib.get_close_matches(tvg_name.replace('_', ' ').lower(), xmltv_chanels_lower,
                                                           cutoff=ns_percents)
                         if len(names) > 0:
                             name_patched = True
-                            tvg_name = names[0]
+                            tvg_name = XMLTV_CHANNELS[xmltv_chanels_lower.index(names[0])]
                         else:
                             name_patched = False
                             tvg_name = None
                     if tvg_name is None:
-                        names = difflib.get_close_matches(name, XMLTV_CHANNELS,
+                        names = difflib.get_close_matches(name.lower(), xmltv_chanels_lower,
                                                           cutoff=ns_percents)
                         if len(names) > 0:
                             name_patched = True
-                            tvg_name = names[0]
+                            tvg_name = XMLTV_CHANNELS[xmltv_chanels_lower.index(names[0])]
                         else:
                             tvg_name = params.get('tvg-name', name)
                             name_patched = False
